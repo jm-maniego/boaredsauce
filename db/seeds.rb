@@ -5,3 +5,12 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+
+# TODO: create poll from user
+polls = [
+  "Who let the dogs out?",
+  "Do we need another social polling app?",
+  "Am I doing it right?"
+].map {|poll_text| {text: poll_text}}
+
+Poll.create(polls)
