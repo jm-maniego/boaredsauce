@@ -15,6 +15,12 @@ Boaredsauce.Views.PollList = class extends React.Component {
 Boaredsauce.Views.PollItem = class extends React.Component {
   render() {
     let poll = this.props.poll
-    return <li className="poll-item">{poll.get('text')}</li>
+    return (
+      <li className="poll-item panel panel-default">
+        <div className="panel-body">
+          {poll.get('text')}
+        </div>
+      </li>
+      )
   }
 }

@@ -2,5 +2,10 @@ body.polls {
   #poll-list {
     list-style: none;
     padding: 0;
+    width: 500px;
+  }
+
+  .poll-item {
+    background-color: white;
   }
 }
