@@ -51,3 +51,5 @@ gem 'backbone-on-rails'
 gem 'react-rails'
 gem 'bootstrap', '~> 4.0.0.alpha5'
 gem 'devise'
+
+gem 'pry-rails', :group => :development
