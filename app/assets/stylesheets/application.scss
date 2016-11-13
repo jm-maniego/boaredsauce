@@ -13,8 +13,26 @@
  */
 @import "bootstrap";
 @import "polls";
+@import "login";
+
+$primary_color: white;
+
+html {
+  font-size: 16px;
+}
+
+body {
+  background-color: #F5F8FA;
+  padding-top: 70px;
+}
 
 .container {
-  width: 980px;
-  margin: 0 auto;
+  max-width: 1040px;
+}
+
+.topbar {
+  nav {
+    padding: 0.640625rem 1rem;
+    background-color: $primary_color;
+  }
 }

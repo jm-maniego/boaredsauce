@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= app_name %></title>
+    <%= csrf_meta_tags %>
+
+    <%= stylesheet_link_tag 'application', media: 'all' %>
+  </head>
+
+  <body class="<%= controller_name %>">
+    <div class="topbar">
+      <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container">
+        Test
+        </div>
+      </nav>
+    </div>
+    <div class="container">
+      <div class="content">
+        <%= yield %>
+      </div>
+    </div>
+    <%= javascript_include_tag 'application' %>
+  </body>
+</html>
