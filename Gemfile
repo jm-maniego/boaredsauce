@@ -53,3 +53,5 @@ gem 'bootstrap-sass'
 gem 'devise'
 
 gem 'pry-rails', :group => :development
+gem "js-routes"
+gem 'jsonapi-resources'
