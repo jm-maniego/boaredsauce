@@ -1,3 +1,3 @@
 class Boaredsauce.Collections.Polls extends Backbone.Collection
-  url: "/polls"
+  url: "api/polls"
   model: Boaredsauce.Models.Poll

@@ -24,7 +24,6 @@ html {
 }
 
 body {
-  background-color: rgba(246, 251, 251, 0.31);
   padding-top: 70px;
 }
 
@@ -40,4 +39,25 @@ body {
 
 .panel {
   margin-bottom: 0.75rem;
+}
+
+// Style
+body {
+  background-color: rgba(246, 251, 251, 0.31);
+}
+
+.topbar {
+  nav {
+    border-color: #d3e0e9;
+  }
+}
+
+.panel {
+  border-color: #d3e0e9;
+  border-radius: 1px;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  margin-top: 0;
+  margin-bottom: 5px;
 }
