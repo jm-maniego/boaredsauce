@@ -1,3 +1,3 @@
 class Api::PollResource < JSONAPI::Resource
-  attributes :text
+  attributes :text, :created_at
 end

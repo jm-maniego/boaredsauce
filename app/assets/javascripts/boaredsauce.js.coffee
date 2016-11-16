@@ -3,6 +3,10 @@ window.Boaredsauce =
   Collections: {}
   Views: {}
   Routers: {}
+  Mixins: {}
+  DataTypes: {
+    date: ['created_at', 'created-at']
+  }
   initialize: ->
     new Boaredsauce.Routers.Polls()
     Backbone.history.start(pushState: true)

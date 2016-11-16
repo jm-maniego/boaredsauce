@@ -19,6 +19,7 @@
 //= require boaredsauce
 //= require react
 //= require react_ujs
+//= require_tree ./mixins
 //= require components
 //= require_tree ./extensions
 //= require_tree ./models

@@ -11,6 +11,9 @@ collection_extensions =
 model_extensions =
   parse: (response) ->
     attributes = response.attributes
+    _.each Boaredsauce.DataTypes.date, (date_attribute)->
+      return unless attributes[date_attribute]?
+      attributes[date_attribute] = attributes[date_attribute].toDate()
     _.extend(attributes,
       id: response.id,
       type: response.type,
@@ -19,5 +22,7 @@ model_extensions =
 
 _.extend(Backbone.Collection.prototype, extensions)
 _.extend(Backbone.Model.prototype, extensions)
-_.extend(Backbone.Collection.prototype, collection_extensions)
+_.extend(Backbone.Collection.prototype,
+  collection_extensions,
+  Boaredsauce.Mixins.Finder)
 _.extend(Backbone.Model.prototype, model_extensions)
