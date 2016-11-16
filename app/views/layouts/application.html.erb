@@ -12,7 +12,7 @@
       <nav class="navbar navbar-default navbar-fixed-top">
         <div class="container">
           <div class="navbar-header">
-            <a class="navbar-brand" href="#">@</a>
+            <a class="navbar-brand" href="#">@boaredsauce</a>
           </div>
         </div>
       </nav>
@@ -27,8 +27,8 @@
       </div>
 
       <%= yield %>
-
-      <%= javascript_include_tag 'application' %>
     </div>
+    <%= javascript_include_tag 'application' %>
+    <%= yield :action_specific_js %>
   </body>
 </html>
