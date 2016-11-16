@@ -16,7 +16,9 @@ end
 polls = [
   "Who let the dogs out?",
   "Do we need another social polling app?",
-  "Am I doing it right?"
+  "Am I doing it right?",
+  "Popcorn anyone?",
+  "Who's your daddy?"
 ].map {|poll_text| {text: poll_text}}
 
 Poll.create(polls) do |poll|
