@@ -13,6 +13,7 @@
  */
 @import "bootstrap-sprockets";
 @import "bootstrap";
+@import "grid_extension";
 @import "polls";
 @import "login";
 
@@ -27,8 +28,38 @@ body {
   padding-top: 70px;
 }
 
-.container {
-  max-width: 1040px;
+// Style
+body {
+  background-color: #E9EBEE;
+}
+
+.topbar {
+  nav {
+    border-color: #d3e0e9;
+  }
+}
+
+.panel {
+  border-color: #d3e0e9;
+}
+
+// Bootstrap overrides
+
+h1, h2, h3, h4, h5, h6 {
+  margin-top: 0;
+  margin-bottom: 5px;
+}
+
+.panel, textarea,
+textarea.form-control,
+div[contenteditable],
+.btn {
+  border-radius: 2.2px;
+}
+
+.btn {
+  min-width: 65px;
+  padding: 3.5px 11.5px;
 }
 
 .topbar {
@@ -41,23 +72,15 @@ body {
   margin-bottom: 0.75rem;
 }
 
-// Style
-body {
-  background-color: rgba(246, 251, 251, 0.31);
+.navbar {
+  min-height: 1rem;
 }
 
-.topbar {
-  nav {
-    border-color: #d3e0e9;
-  }
+.navbar-brand {
+  padding: 0.765625rem 1rem;
+  height: auto;
 }
 
-.panel {
-  border-color: #d3e0e9;
-  border-radius: 1px;
-}
-
-h1, h2, h3, h4, h5, h6 {
-  margin-top: 0;
-  margin-bottom: 5px;
+div[contenteditable] {
+  height: auto
 }

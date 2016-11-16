@@ -1,8 +1,11 @@
 body.polls {
+  #poll-table {
+    max-width: 500px;
+  }
+
   #poll-list {
     list-style: none;
     padding: 0;
-    width: 500px;
   }
 
   .poll-item {

@@ -1,0 +1,13 @@
+.container {
+  max-width: 1040px;
+}
+
+[class*="col-"], .form-group {
+  margin-bottom: 0.5rem;
+}
+
+.row {
+  .row:last-child [class*="col-"] {
+    margin-bottom: 0;
+  }
+}
