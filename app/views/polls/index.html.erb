@@ -1,5 +1,5 @@
 <% content_for :action_specific_js do %>
 <script type="text/javascript">
-  Boaredsauce.polls = new Boaredsauce.Collections.Polls(<%= @polls.to_json.html_safe %>)
+  Boaredsauce.polls = new Boaredsauce.Collections.Polls(<%= @polls.as_json[:data].to_json.html_safe %>)
 </script>
 <% end %>

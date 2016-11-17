@@ -28,6 +28,11 @@ body {
   padding-top: 70px;
 }
 
+[contentEditable]:empty:not(:focus)::before{
+  content: attr(data-placeholder);
+  opacity: 0.5;
+}
+
 // Style
 body {
   background-color: #E9EBEE;

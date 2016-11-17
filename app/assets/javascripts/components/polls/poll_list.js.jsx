@@ -12,44 +12,54 @@ class PollTable extends React.Component {
 class PollForm extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {
+      text: "",
+      polls: new Boaredsauce.Collections.Polls()
+    }
     _.extend(this, Boaredsauce.Mixins.FormEvents)
   }
 
   handleSubmit(e) {
     e.preventDefault();
+    this.state.polls.create({
+      text: this.state.text,
+      created_at: new Date()
+    })
   }
 
   render() {
     return (
       <div>
         <Panel>
-          <Form action="/" onSubmit={(e) => this.handleSubmit(e)}>
+          <Form onSubmit={(e) => this.handleSubmit(e)}>
             <FormGroup>
-              <ContentEditable data-name="text" onKeyUp={(e) => this.inputChange(e)} />
+              <ContentEditable data-placeholder="ask me anything" data-name="text" onKeyUp={(e) => this.inputChange(e)} />
             </FormGroup>
             <SubmitButton name="poll" />
           </Form>
         </Panel>
-        <NewListContainer />
+        <NewListContainer collection={this.state.polls} />
       </div>
       )
   }
 }
 
 class NewListContainer extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      collection: new Boaredsauce.Collections.Polls()
-    }
-  }
-
   render() {
-    return (<PollList polls={this.state.collection}/>)
+    return (<PollList polls={this.props.collection}/>)
   }
 }
 
 class PollList extends React.Component {
+  constructor(props) {
+    super(props);
+    _.extend(this, Boaredsauce.Mixins.BackboneMixin)
+  }
+
+  modelOrCollection() {
+    return this.props.polls
+  }
+
   render() {
     return (
       <div>
@@ -81,15 +91,6 @@ class PollItem extends React.Component {
 }
 
 class PollIndex extends React.Component {
-  constructor(props) {
-    super(props);
-    _.extend(this, Boaredsauce.Mixins.BackboneMixin)
-  }
-
-  modelOrCollection() {
-    return this.props.backboneView.collection
-  }
-
   render() {
     let polls = this.props.backboneView.collection
     return (

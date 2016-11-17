@@ -1,7 +1,9 @@
 Boaredsauce.Mixins.BackboneMixin = {
   componentDidMount: function() {
-    console.log('component did mount!!')
-    this.props.backboneView.listenTo(this.modelOrCollection(), 'add remove', _.debounce(()=> this.forceUpdate(), 5))
+    this.modelOrCollection().on('add remove change', _.debounce(()=> this.forceUpdate(), 5));
+  },
+  componentWillUnmount: function () {
+    this.modelOrCollection().off(null, null, this);
   }
 }
 

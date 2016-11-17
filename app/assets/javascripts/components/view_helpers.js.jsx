@@ -23,7 +23,7 @@ class ContentEditable extends React.Component {
     let props = _.extend({}, this.props)
     props.className = ['form-control', props.className].join(' ')
     return (
-      <div {...props} contentEditable='true' data-placeholder="Yello"></div>
+      <div {...props} contentEditable='true'></div>
     )
   }
 }

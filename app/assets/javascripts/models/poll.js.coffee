@@ -1,1 +1,2 @@
-class Boaredsauce.Models.Poll extends Backbone.Model
+class Boaredsauce.Models.Poll extends Boaredsauce.Models.BaseModel
+  type: 'poll'
