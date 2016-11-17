@@ -7,5 +7,8 @@ Rails.application.routes.draw do
   end
 
   resources :polls
+  namespace :api do
+    resources :polls, defaults: {format: :json}
+  end
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
