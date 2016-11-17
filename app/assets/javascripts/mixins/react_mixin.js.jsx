@@ -9,9 +9,9 @@ Boaredsauce.Mixins.BackboneMixin = {
 
 Boaredsauce.Mixins.FormEvents = {
   inputChange: function(e) {
-    let $target = $(e.target)
-    let name = $target.data('name')
-    let value = e.target.value || $target.text()
-    return this.setState({ [ name ]: value})
+    let $target = $(e.target);
+    let name = $target.attr('name') || $target.data('name');
+    let value = e.target.value || $target.text();
+    return this.setState({ [ name ]: value });
   }
 }

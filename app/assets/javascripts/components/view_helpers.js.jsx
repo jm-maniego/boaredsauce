@@ -23,8 +23,20 @@ class ContentEditable extends React.Component {
     let props = _.extend({}, this.props)
     props.className = ['form-control', props.className].join(' ')
     return (
-      <div {...props} contentEditable='true'></div>
+      <div {...props}
+        contentEditable
+        onInput={(e) => this.handleChange(e)}
+        onBlur={(e) => this.handleChange(e)}
+        dangerouslySetInnerHTML={{__html: this.props['data-html']}}></div>
     )
+  }
+
+  handleChange(e) {
+    let html = e.target.innerHTML
+    if (html !== this.lastHTML) {
+      this.props.onChange && this.props.onChange(e)
+    }
+    this.lastHTML = html;
   }
 }
 

@@ -21,10 +21,13 @@ class PollForm extends React.Component {
 
   handleSubmit(e) {
     e.preventDefault();
+    if (this.state.text.trim().length == 0) { return }
+
     this.state.polls.create({
       text: this.state.text,
       created_at: new Date()
-    })
+    }, {silent: true})
+    this.setState({text: ""})
   }
 
   render() {
@@ -33,7 +36,11 @@ class PollForm extends React.Component {
         <Panel>
           <Form onSubmit={(e) => this.handleSubmit(e)}>
             <FormGroup>
-              <ContentEditable data-placeholder="ask me anything" data-name="text" onKeyUp={(e) => this.inputChange(e)} />
+              <ContentEditable
+                data-html={this.state.text}
+                data-placeholder="ask me anything"
+                data-name="text"
+                onChange={(e) => this.inputChange(e)} />
             </FormGroup>
             <SubmitButton name="poll" />
           </Form>
