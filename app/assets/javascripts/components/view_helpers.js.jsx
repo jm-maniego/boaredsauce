@@ -1,7 +1,7 @@
 class Form extends React.Component {
   render() {
     return (
-      <form action={this.props.action} onSubmit={this.props.onSubmit}>
+      <form {...this.props} action={this.props.action} onSubmit={this.props.onSubmit}>
         {this.props.children}
       </form>
       )
@@ -50,7 +50,7 @@ class Panel extends React.Component {
   render() {
     let className = ['panel panel-default', this.props.className].join(' ')
     return (
-      <div className={className}>
+      <div {...this.props} className={className}>
         <div className="panel-body">
           {this.props.children}
         </div>

@@ -33,8 +33,8 @@ class PollForm extends React.Component {
   render() {
     return (
       <div>
-        <Panel>
-          <Form onSubmit={(e) => this.handleSubmit(e)}>
+        <Panel id="poll-form-wrapper">
+          <Form id="poll-form" onSubmit={(e) => this.handleSubmit(e)}>
             <FormGroup>
               <ContentEditable
                 data-html={this.state.text}
