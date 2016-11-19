@@ -3,6 +3,6 @@ class ApplicationRecord < ActiveRecord::Base
   include ApiPresentable
 
   class ActiveRecord::Relation
-    include ApiPresentable
+    include ApiPresentable::Collection
   end
 end

@@ -8,27 +8,32 @@ class Api::ResourcePresenter
     end
   end
 
-  class CollectionPresenter
-    def initialize(collection)
-      @collection = collection
-    end
-
-    def as_json(options={})
-      json_collection = @collection.map {|object| object.resource_presenter.new(object).as_json(options) }
-      {data: json_collection}
-    end
-  end
-
   def initialize(object)
     @object = object
   end
 
-  def attributes(options={})
-    @object.attributes.slice(*self.class.allowed_attributes.map(&:to_s)).as_json(options)
+  def as_json(options={})
+    options = (options||{}).merge({
+      only: klass.allowed_attributes
+      })
+    @object.serializable_hash_without_presenter(options)
+  end
+
+  def klass
+    self.class
+  end
+end
+
+class Api::ResourcePresenter::CollectionPresenter
+  def initialize(collection)
+    @collection = collection
   end
 
   def as_json(options={})
-    return CollectionPresenter.new(@object).as_json(options) if @object.respond_to?(:each)
-    attributes(options)
+    options = options.merge({
+      include: @collection.includes_values
+      })
+    json_collection = @collection.map {|object| object.as_json(options) }
+    {data: json_collection}
   end
 end
