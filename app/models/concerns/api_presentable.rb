@@ -16,12 +16,8 @@ module ApiPresentable
     extend ActiveSupport::Concern
 
     included do
-      def resource_presenter
-        "Api::#{@klass}Presenter".constantize
-      end
-
       def as_json(options={})
-        resource_presenter::CollectionPresenter.new(self).as_json(options)
+        Api::ResourceCollectionPresenter.new(self).as_json(options)
       end
     end
   end
