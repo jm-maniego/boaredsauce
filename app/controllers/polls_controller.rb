@@ -1,5 +1,5 @@
 class PollsController < ApplicationController
   def index
-    @polls = Poll.all
+    @polls = Poll.all.includes(:user)
   end
 end
