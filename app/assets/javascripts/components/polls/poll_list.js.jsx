@@ -25,7 +25,8 @@ class PollForm extends React.Component {
 
     this.state.polls.create({
       text: this.state.text,
-      created_at: new Date()
+      created_at: new Date(),
+      user: Boaredsauce.current_user
     }, {silent: true})
     this.setState({text: ""})
   }
@@ -70,7 +71,7 @@ class PollList extends React.Component {
   render() {
     return (
       <div>
-        <ol id="poll-list">
+        <ol className="poll-list">
           {this.props.polls.map( (poll) => {
             return <PollItem key={poll.cid} poll={poll} />
           })}
@@ -82,12 +83,12 @@ class PollList extends React.Component {
 
 class PollItem extends React.Component {
   render() {
-    console.log('rendering poll item!')
     let poll = this.props.poll
+    let user = poll.get('user')
     return (
       <Panel className="poll-item">
         <div>
-          <h5><a href="#">Juan Miguel Maniego</a></h5>
+          <h5><a href="#">{user.fullname()}</a></h5>
         </div>
         <p>
           {poll.get('text')}

@@ -5,4 +5,10 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :trackable, :validatable
 
   has_many :polls
+
+  def initials
+    fname_a, fname_b = first_name.split(/\s/)[0..1]
+    fname_b ||= fname_a[1]
+    [fname_a, fname_b].map(&:first).join.upcase
+  end
 end

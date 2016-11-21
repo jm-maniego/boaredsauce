@@ -58,7 +58,7 @@ h1, h2, h3, h4, h5, h6 {
 .panel, textarea,
 textarea.form-control,
 div[contenteditable],
-.btn {
+.btn, [class^='media-'] {
   border-radius: 2.2px;
 }
 
@@ -88,4 +88,10 @@ div[contenteditable],
 
 div[contenteditable] {
   height: auto
+}
+
+.navbar-header #current-user {
+  padding: 0.765625rem 1rem;
+  float: left;
+  background-color: rgb(185,185,185);
 }

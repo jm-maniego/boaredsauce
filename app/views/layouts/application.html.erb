@@ -12,6 +12,7 @@
       <nav class="navbar navbar-default navbar-fixed-top">
         <div class="container">
           <div class="navbar-header">
+            <span id="current-user" class="media-user"><%= current_user.initials %></span>
             <a class="navbar-brand" href="#">@boaredsauce</a>
           </div>
         </div>
@@ -29,6 +30,9 @@
       <%= yield %>
     </div>
     <%= javascript_include_tag 'application' %>
+    <script type="text/javascript">
+      Boaredsauce.current_user = new Boaredsauce.Models.User(<%= current_user.to_json.html_safe %>);
+    </script>
     <%= yield :action_specific_js %>
   </body>
 </html>
