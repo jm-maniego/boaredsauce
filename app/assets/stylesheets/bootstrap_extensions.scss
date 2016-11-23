@@ -16,8 +16,9 @@ h1, h2, h3, h4, h5, h6 {
 .panel, textarea,
 .form-control,
 div[contenteditable],
-.btn, [class^='media-'] {
-  border-radius: 2.2px;
+.btn, [class^='media-'],
+.dropdown-menu {
+  border-radius: 1.7px;
 }
 
 .btn {
