@@ -12,19 +12,23 @@
       <nav class="navbar navbar-default navbar-fixed-top">
         <div class="container">
           <div class="navbar-header">
-            <span id="current-user" class="media-user"><%= current_user.initials %></span>
+            <span id="current-user-dropdown" class="dropdown">
+              <button href="#" class="dropdown-toggle" data-toggle="dropdown" role="button">
+                <%= current_user.initials %></button>
+              <ul class="dropdown-menu">
+                <li><%= link_to 'View Profile', current_user %></li>
+                <li role="separator" class="divider"></li>
+                <li><%= link_to 'Log out', destroy_user_session_path, :method => :delete, 'data-bypass': true %></li>
+              </ul>
+            </span>
+
             <a class="navbar-brand" href="#">@boaredsauce</a>
           </div>
         </div>
       </nav>
     </div>
     <div class="container">
-      <% content_defined?(notice, alert) do %>
-        <p class="notice"><%= notice %></p>
-        <p class="alert"><%= alert %></p>
-      <% end %>
       <div id="main-container">
-
       </div>
 
       <%= yield %>

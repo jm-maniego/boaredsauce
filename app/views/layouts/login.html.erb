@@ -12,16 +12,54 @@
       <nav class="navbar navbar-default navbar-fixed-top">
         <div class="container">
           <div class="navbar-header">
-            <a class="navbar-brand" href="#">@boaredsauce</a>
+            <a class="navbar-brand" href="/">@boaredsauce</a>
           </div>
+          <div>
+            <ul class="nav navbar-nav">
+              <li><a href="#">about</a></li>
+            </ul>
+          </div>
+          <%= form_for(resource, as: resource_name,
+                                 url: session_path(resource_name),
+                                 html: {class:"navbar-form navbar-right"}) do |f| %>
+            <div class="form-group">
+              <%= f.email_field :email, autofocus: true, class: "form-control" %>
+            </div>
+
+            <div class="form-group">
+              <%= f.password_field :password, autocomplete: "off", class: "form-control" %>
+            </div>
+
+            <% if false && devise_mapping.rememberable? -%>
+              <div class="checkbox">
+                <label>
+                  <%= f.check_box :remember_me %> Remember me
+                </label>
+              </div>
+            <% end %>
+
+            <%= f.submit "Log in", class: "btn btn-default" %>
+          <% end %>
         </div>
       </nav>
     </div>
     <div class="container">
       <div class="content">
-        <%= yield %>
+        <div class="row">
+          <div class="col-xs-8">
+            <h1>you need answers</h1>
+            <h2>and everyone around you</h2>
+          </div>
+          <div class="col-xs-4">
+            <div class="panel panel-default">
+              <div class="panel-body">
+                <%= yield %>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
-    <%= javascript_include_tag 'application' %>
+    <%= javascript_include_tag 'login' %>
   </body>
 </html>

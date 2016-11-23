@@ -1,6 +1,17 @@
-body.sessions {
+body.sessions, body.registrations {
   .content {
+    padding-top: 100px;
     width: 840px;
     margin: 0 auto;
+  }
+
+  [class^="col-"].form-group {
+    .form-control {
+      width: 100%;
+    }
+  }
+
+  .btn {
+    padding: 6px 12px;
   }
 }
