@@ -11,17 +11,19 @@
  * It is generally better to create a new file per style scope.
  *
  */
+$primary_color: white;
+
 @import "bootstrap-sprockets";
 @import "bootstrap";
 @import "grid_extension";
 @import "polls";
 @import "login";
-
-$primary_color: white;
+@import "bootstrap_extensions";
 
 html {
   font-size: 16px;
   letter-spacing: 0.65px;
+  overflow-y: scroll;
 }
 
 body {
@@ -38,60 +40,16 @@ body {
   background-color: #E9EBEE;
 }
 
-.topbar {
-  nav {
-    border-color: #d3e0e9;
-  }
-}
 
-.panel {
-  border-color: #d3e0e9;
-}
-
-// Bootstrap overrides
-
-h1, h2, h3, h4, h5, h6 {
-  margin-top: 0;
-  margin-bottom: 5px;
-}
-
-.panel, textarea,
-textarea.form-control,
-div[contenteditable],
-.btn, [class^='media-'] {
-  border-radius: 2.2px;
-}
-
-.btn {
-  min-width: 65px;
-  padding: 3.5px 11.5px;
-}
-
-.topbar {
-  nav {
-    background-color: $primary_color;
-  }
-}
-
-.panel {
-  margin-bottom: 0.75rem;
-}
-
-.navbar {
-  min-height: 1rem;
-}
-
-.navbar-brand {
-  padding: 0.765625rem 1rem;
+div[contenteditable] {
   height: auto;
 }
 
-div[contenteditable] {
-  height: auto
+ul {
+  list-style: none;
+  padding: 0
 }
 
-.navbar-header #current-user {
-  padding: 0.765625rem 1rem;
-  float: left;
-  background-color: rgb(185,185,185);
+label {
+  cursor: pointer;
 }

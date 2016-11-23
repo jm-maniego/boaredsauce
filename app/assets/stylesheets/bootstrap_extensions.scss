@@ -1,0 +1,71 @@
+.topbar {
+  nav {
+    border-color: #d3e0e9;
+  }
+}
+
+.panel {
+  border-color: #d3e0e9;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  margin-top: 0;
+  margin-bottom: 5px;
+}
+
+.panel, textarea,
+.form-control,
+div[contenteditable],
+.btn, [class^='media-'] {
+  border-radius: 2.2px;
+}
+
+.btn {
+  min-width: 65px;
+  padding: 3.5px 11.5px;
+}
+
+.topbar {
+  nav {
+    background-color: $primary_color;
+  }
+}
+
+.panel {
+  margin-bottom: 0.75rem;
+}
+
+.navbar {
+  min-height: 1rem;
+}
+
+.navbar-brand {
+  padding-right: 1rem;
+  padding-left: 1rem;
+  display: inline-block;
+  height: auto;
+  float: none;
+}
+
+.navbar-brand,
+.navbar-nav > li > a {
+  padding-top: 0.765625rem;
+  padding-bottom: 0.765625rem;
+}
+
+.navbar-header #current-user-dropdown {
+  display: inline-block;
+  background-color: #C0C0C0;
+  border: #C0C0C0 1px solid;
+  &>button {
+    border: none;
+    padding: 0.765625rem 1rem;
+  }
+}
+
+.panel {
+  .panel-actions {
+    background-color: #F6F7F9;
+    padding: .375rem 15px;
+  }
+}

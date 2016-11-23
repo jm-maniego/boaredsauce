@@ -7,4 +7,3 @@ class Boaredsauce.Views.BaseView extends Backbone.View
   render: ->
     ReactDOM.render(@component(), this.el)
     this
-

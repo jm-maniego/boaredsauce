@@ -1,22 +1,17 @@
-body.polls {
-  #poll-table {
-    max-width: 500px;
-  }
+.poll-list {
+  list-style: none;
+  padding: 0;
+}
 
-  .poll-list {
-    list-style: none;
-    padding: 0;
-  }
+.poll-item {
+  background-color: white;
+  p { word-wrap: break-word }
+}
 
-  .poll-item {
-    background-color: white;
-  }
+#poll-form {
+  margin-bottom: 1.3rem;
 
-  #poll-form {
+  &> .panel {
     padding-top: 1rem;
-  }
-
-  #poll-form-wrapper {
-    margin-bottom: 1rem;
   }
 }
