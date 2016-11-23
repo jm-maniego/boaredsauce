@@ -13,14 +13,20 @@ jm = User.find_or_create_by(email: 'jmmaniego@hotmail.com') do |user|
   user.password_confirmation = password
 end
 
+poll_choices = [
+  "Yes",
+  "No",
+  "Maybe"
+].map {|choice| {text: choice} }
+
 polls = [
   "Who let the dogs out?",
   "Do we need another social polling app?",
   "Am I doing it right?",
   "Popcorn anyone?",
   "Who's your daddy?"
-].map {|poll_text| {text: poll_text}}
+].map {|poll_text| {text: poll_text, poll_choices_attributes: poll_choices}}
 
-Poll.create(polls) do |poll|
+Poll.create!(polls) do |poll|
   poll.user = jm
 end

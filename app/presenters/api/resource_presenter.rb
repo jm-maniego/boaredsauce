@@ -1,15 +1,15 @@
 class Api::ResourcePresenter
-  class_attribute :allowed_attributes, :belongs_to_associations
+  class_attribute :allowed_attributes, :included_associations
   self.allowed_attributes = [] # Must be an array of string attributes
-  self.belongs_to_associations = []
+  self.included_associations = []
 
   class << self
     def attributes(*attributes)
       self.allowed_attributes = attributes
     end
 
-    def belongs_to(association=nil)
-      self.belongs_to_associations += [association]
+    def includes(*association)
+      self.included_associations += association
     end
   end
 
@@ -20,7 +20,7 @@ class Api::ResourcePresenter
   def as_json(options={})
     options = (options||{}).merge({
       only: klass.allowed_attributes,
-      include: klass.belongs_to_associations
+      include: klass.included_associations
       })
     @object.serializable_hash_without_presenter(options)
   end
