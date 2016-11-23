@@ -1,4 +1,4 @@
 class Boaredsauce.Views.PollsIndex extends Boaredsauce.Views.BaseView
   component: ->
     polls = @collection
-    `<PollIndex backboneView={this}/>`
+    `<PollScreen collection={polls}/>`

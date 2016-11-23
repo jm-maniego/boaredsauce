@@ -17,13 +17,15 @@ class FormGroup extends React.Component {
     )
   }
 }
-
+// http://stackoverflow.com/questions/22677931/react-js-onchange-event-for-contenteditable
+// https://github.com/lovasoa/react-contenteditable/blob/master/src/react-contenteditable.js
 class ContentEditable extends React.Component {
   render() {
     let props = _.extend({}, this.props)
     props.className = ['form-control', props.className].join(' ')
     return (
       <div {...props}
+        ref={(e) => this.htmlEl = e}
         contentEditable
         onInput={(e) => this.handleChange(e)}
         onBlur={(e) => this.handleChange(e)}
@@ -31,9 +33,22 @@ class ContentEditable extends React.Component {
     )
   }
 
+  shouldComponentUpdate(nextProps) {
+    return (
+      !this.htmlEl || ( nextProps['data-html'] !== this.htmlEl.innerHTML && nextProps['data-html'] !== this.props['data-html'] )
+    );
+  }
+
+  componentDidUpdate() {
+    if ( this.htmlEl && this.props['data-html'] !== this.htmlEl.innerHTML ) {
+      this.htmlEl.innerHTML = this.props['data-html'];
+    }
+  }
   handleChange(e) {
-    let html = e.target.innerHTML
+    if (!this.htmlEl) return;
+    var html = this.htmlEl.innerHTML;
     if (html !== this.lastHTML) {
+      e.target.value = html
       this.props.onChange && this.props.onChange(e)
     }
     this.lastHTML = html;
@@ -49,11 +64,24 @@ class SubmitButton extends React.Component {
 class Panel extends React.Component {
   render() {
     let className = ['panel panel-default', this.props.className].join(' ')
+    var {actions, ...props} = this.props
+    actions = actions && <PanelActions>{actions}</PanelActions>
     return (
-      <div {...this.props} className={className}>
+      <div {...props} className={className}>
         <div className="panel-body">
           {this.props.children}
         </div>
+        {actions}
+      </div>
+      )
+  }
+}
+
+class PanelActions extends React.Component {
+  render() {
+    return (
+      <div className="panel-actions">
+        {this.props.children}
       </div>
       )
   }
