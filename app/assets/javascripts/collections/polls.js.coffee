@@ -1,4 +1,4 @@
-class Boaredsauce.Collections.Polls extends Backbone.Collection
+class Boaredsauce.Collections.Polls extends Boaredsauce.Collections.BaseCollection
   url: "api/polls"
   model: Boaredsauce.Models.Poll
   comparator: (a, b) ->

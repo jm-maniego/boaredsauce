@@ -19,6 +19,7 @@
 //= require boaredsauce
 //= require react
 //= require react_ujs
+//= require jquery-deparam.min
 //= require_tree ./mixins
 //= require components
 //= require_tree ./extensions

@@ -8,5 +8,15 @@ class Poll < ApplicationRecord
     :rating
   ]
 
-  accepts_nested_attributes_for :poll_choices
+  validates :text, presence: true
+  validates :text, length: { maximum: 140 }
+  validate :poll_choices_minimum
+
+  accepts_nested_attributes_for :poll_choices, reject_if: ->(attributes) { attributes['text'].strip.blank? }
+
+  private
+
+    def poll_choices_minimum
+      errors.add(:poll_choices, "must be at least 2") if poll_choices.size < 2
+    end
 end

@@ -5,9 +5,8 @@ class Api::PollsController < Api::ResourceController
 
   def create
     @poll = current_user.polls.new(poll_params)
-    if @poll.save
-      respond_with @poll
-    end
+    @poll.save
+    respond_with @poll, full_messages: true
   end
 
   private
@@ -17,6 +16,6 @@ class Api::PollsController < Api::ResourceController
     end
 
     def poll_params
-      params.require(:poll).permit(:text)
+      params.require(:poll).permit(:text, poll_choices_attributes: PollChoice::ACCESSIBLE_ATTRIBUTES)
     end
 end

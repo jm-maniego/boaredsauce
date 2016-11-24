@@ -1,2 +1,2 @@
-class Boaredsauce.Collections.PollChoices extends Backbone.Collection
+class Boaredsauce.Collections.PollChoices extends Boaredsauce.Collections.BaseCollection
   model: Boaredsauce.Models.PollChoice

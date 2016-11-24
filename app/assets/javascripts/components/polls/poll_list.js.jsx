@@ -1,3 +1,39 @@
+class PollScreen extends React.Component {
+  render() {
+    let polls = this.props.collection
+    let current_user = Boaredsauce.current_user
+    return (
+      <BSRow>
+        <div className="col-xs-3">
+          <Panel>
+            <PanelBody>
+              <ul>
+                {Array(15).fill().map(function(x, i) {
+                  return <li key={i}><a href="#">@channel{i}</a></li>
+                })}
+              </ul>
+            </PanelBody>
+          </Panel>
+        </div>
+
+        <div id="content-container" className="col-xs-6">
+          <PollTable polls={polls}/>
+        </div>
+
+        <div className="col-xs-3">
+          <div>
+            <Panel>
+              <PanelBody>
+                <a href={Routes.user_path(current_user)}>{current_user.fullname()}</a>
+              </PanelBody>
+            </Panel>
+          </div>
+        </div>
+      </BSRow>
+      )
+  }
+}
+
 class PollTable extends React.Component {
   render() {
     return (
@@ -14,40 +50,59 @@ class PollForm extends React.Component {
     super(props);
     this.state = {
       text: "",
-      polls: new Boaredsauce.Collections.Polls()
+      html: "",
+      polls: new Boaredsauce.Collections.Polls(),
+      poll: new Boaredsauce.Models.Poll()
     }
+    this.state.poll.build_poll_choices();
     _.extend(this, Boaredsauce.Mixins.FormEvents)
   }
 
   handleSubmit(e) {
     e.preventDefault();
-    textInput = this.textInput.htmlEl
-    value = textInput.innerText.trim()
-    if (value.length == 0) { return }
+    if (!(this.state.text.length > 0)) { return }
 
-    this.state.polls.create({
-      text: value,
+    let $form = $(e.target)
+    let form_values = $.deparam($form.serialize())
+    let newPoll = new Boaredsauce.Models.Poll(form_values.poll)
+    newPoll.set({
+      text: this.state.text,
       created_at: new Date(),
       user: Boaredsauce.current_user
-    }, {silent: true})
-    this.setState({text: ""})
+    })
+    this.state.polls.create(newPoll, {silent: true, error: (model, xhr)=> {
+      debugger
+      model.destroy();
+    }})
+    this.setState({text: "", html: ""})
+  }
+
+  textInputChange(e) {
+    let target = e.target
+    let value = target.innerText.trim()
+
+    this.setState({text: value, html: target.value})
   }
 
   render() {
+    let poll_choices = this.state.poll.get('poll_choices');
     return (
       <div>
-        <Form id="poll-form" onSubmit={(e) => this.handleSubmit(e)}>
+        <Form
+          id="poll-form"
+          onSubmit={(e) => this.handleSubmit(e)}>
+          <input type="hidden" name="poll[text]" value={this.state.text} />
           <Panel>
             <PanelBody>
               <FormGroup>
                 <ContentEditable
-                  ref={(textInput) => this.textInput = textInput}
-                  data-html={this.state.text}
+                  data-html={this.state.html}
                   data-placeholder="ask me anything"
-                  data-name="text"
-                  onChange={(e) => this.inputChange(e)} />
+                  data-name="html"
+                  onChange={(e) => this.textInputChange(e)} />
               </FormGroup>
             </PanelBody>
+            <PollChoicesForm collection={poll_choices}/>
             <PanelActions>
               <SubmitButton name="poll" />
             </PanelActions>
@@ -104,42 +159,6 @@ class PollItem extends React.Component {
         </PanelBody>
         <PollChoiceList collection={poll.get('poll_choices')}/>
       </Panel>
-      )
-  }
-}
-
-class PollScreen extends React.Component {
-  render() {
-    let polls = this.props.collection
-    let current_user = Boaredsauce.current_user
-    return (
-      <BSRow>
-        <div className="col-xs-3">
-          <Panel>
-            <PanelBody>
-              <ul>
-                {Array(15).fill().map(function(x, i) {
-                  return <li key={i}><a href="#">@channel{i}</a></li>
-                })}
-              </ul>
-            </PanelBody>
-          </Panel>
-        </div>
-
-        <div id="content-container" className="col-xs-6">
-          <PollTable polls={polls}/>
-        </div>
-
-        <div className="col-xs-3">
-          <div>
-            <Panel>
-              <PanelBody>
-                <a href={Routes.user_path(current_user)}>{current_user.fullname()}</a>
-              </PanelBody>
-            </Panel>
-          </div>
-        </div>
-      </BSRow>
       )
   }
 }
