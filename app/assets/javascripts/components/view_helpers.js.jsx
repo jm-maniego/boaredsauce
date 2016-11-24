@@ -65,13 +65,19 @@ class Panel extends React.Component {
   render() {
     let className = ['panel panel-default', this.props.className].join(' ')
     var {actions, ...props} = this.props
-    actions = actions && <PanelActions>{actions}</PanelActions>
     return (
       <div {...props} className={className}>
-        <div className="panel-body">
-          {this.props.children}
-        </div>
-        {actions}
+        {this.props.children}
+      </div>
+      )
+  }
+}
+
+class PanelBody extends React.Component {
+  render() {
+    return(
+      <div className="panel-body">
+        {this.props.children}
       </div>
       )
   }

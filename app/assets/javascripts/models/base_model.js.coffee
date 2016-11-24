@@ -5,11 +5,16 @@ class Boaredsauce.Models.BaseModel extends Backbone.Model
     super
     if model_attributes = attributes.attributes
       @attributes = model_attributes
-
-    _.each(@belongs_to, ((model_str)->
-      model_class_str = _(model_str).capitalize()
-      model_class = Boaredsauce.Models[model_class_str]
-      @attributes[model_str] = new model_class(attributes[model_str])
+    association_mapping = {
+      'Models': @belongs_to,
+      'Collections': @has_many
+    }
+    _.each(association_mapping, ((associations, association_type)->
+      _.each(associations, ((association_str) ->
+        association_class_str = _(association_str).classify()
+        association_class = Boaredsauce[association_type][association_class_str]
+        @attributes[association_str] = new association_class(attributes[association_str])
+      ), this)
     ), this)
 
   toJSON: ->

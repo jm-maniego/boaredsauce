@@ -1,6 +1,6 @@
 class Api::PollsController < Api::ResourceController
   def index
-    respond_with Poll.all.includes(:user)
+    respond_with Poll.all.includes(:user, :poll_choices)
   end
 
   def create

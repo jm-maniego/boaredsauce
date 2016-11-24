@@ -5,13 +5,26 @@
 
 .poll-item {
   background-color: white;
-  p { word-wrap: break-word }
+  p {
+    word-wrap: break-word;
+    font-size: 1.5rem;
+  }
+  .list-group-item {
+    cursor: pointer;
+    &:hover {background-color: #F6F7F9}
+  }
 }
 
 #poll-form {
   margin-bottom: 1.3rem;
 
   &> .panel {
-    padding-top: 1rem;
+    padding-top: 1.3rem;
+  }
+}
+
+.panel-actions {
+  .list-group {
+    margin-bottom: 0;
   }
 }

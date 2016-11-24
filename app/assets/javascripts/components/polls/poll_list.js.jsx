@@ -37,15 +37,20 @@ class PollForm extends React.Component {
     return (
       <div>
         <Form id="poll-form" onSubmit={(e) => this.handleSubmit(e)}>
-          <Panel actions={<SubmitButton name="poll" />}>
-            <FormGroup>
-              <ContentEditable
-                ref={(textInput) => this.textInput = textInput}
-                data-html={this.state.text}
-                data-placeholder="ask me anything"
-                data-name="text"
-                onChange={(e) => this.inputChange(e)} />
-            </FormGroup>
+          <Panel>
+            <PanelBody>
+              <FormGroup>
+                <ContentEditable
+                  ref={(textInput) => this.textInput = textInput}
+                  data-html={this.state.text}
+                  data-placeholder="ask me anything"
+                  data-name="text"
+                  onChange={(e) => this.inputChange(e)} />
+              </FormGroup>
+            </PanelBody>
+            <PanelActions>
+              <SubmitButton name="poll" />
+            </PanelActions>
           </Panel>
         </Form>
         <NewListContainer collection={this.state.polls} />
@@ -89,12 +94,15 @@ class PollItem extends React.Component {
     let user = poll.get('user')
     return (
       <Panel className="poll-item">
-        <div>
-          <h5><a href={Routes.user_path(user)}>{user.fullname()}</a></h5>
-        </div>
-        <p>
-          {poll.get('text')}
-        </p>
+        <PanelBody>
+          <div>
+            <h5><a href={Routes.user_path(user)}>{user.fullname()}</a></h5>
+          </div>
+          <p>
+            {poll.get('text')}
+          </p>
+        </PanelBody>
+        <PollChoiceList collection={poll.get('poll_choices')}/>
       </Panel>
       )
   }
@@ -108,11 +116,13 @@ class PollScreen extends React.Component {
       <BSRow>
         <div className="col-xs-3">
           <Panel>
-            <ul>
-              {Array(15).fill().map(function(x, i) {
-                return <li key={i}><a href="#">@channel{i}</a></li>
-              })}
-            </ul>
+            <PanelBody>
+              <ul>
+                {Array(15).fill().map(function(x, i) {
+                  return <li key={i}><a href="#">@channel{i}</a></li>
+                })}
+              </ul>
+            </PanelBody>
           </Panel>
         </div>
 
@@ -123,7 +133,9 @@ class PollScreen extends React.Component {
         <div className="col-xs-3">
           <div>
             <Panel>
-              <a href={Routes.user_path(current_user)}>{current_user.fullname()}</a>
+              <PanelBody>
+                <a href={Routes.user_path(current_user)}>{current_user.fullname()}</a>
+              </PanelBody>
             </Panel>
           </div>
         </div>
