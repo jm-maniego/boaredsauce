@@ -1,10 +1,9 @@
 class PollScreen extends React.Component {
   render() {
     let polls = this.props.collection
-    let current_user = Boaredsauce.current_user
     return (
       <BSRow>
-        <div className="col-xs-3">
+        <div className="col-xs-2">
           <Panel>
             <PanelBody>
               <ul>
@@ -21,13 +20,7 @@ class PollScreen extends React.Component {
         </div>
 
         <div className="col-xs-3">
-          <div>
-            <Panel>
-              <PanelBody>
-                <a href={Routes.user_path(current_user)}>{current_user.fullname()}</a>
-              </PanelBody>
-            </Panel>
-          </div>
+          <Dashboard />
         </div>
       </BSRow>
       )
@@ -54,8 +47,12 @@ class PollForm extends React.Component {
       polls: new Boaredsauce.Collections.Polls(),
       poll: new Boaredsauce.Models.Poll()
     }
-    this.state.poll.build_poll_choices();
+    this.buildPollChoices();
     _.extend(this, Boaredsauce.Mixins.FormEvents)
+  }
+
+  buildPollChoices() {
+    this.state.poll.build_poll_choices();
   }
 
   handleSubmit(e) {
@@ -70,11 +67,17 @@ class PollForm extends React.Component {
       created_at: new Date(),
       user: Boaredsauce.current_user
     })
-    this.state.polls.create(newPoll, {silent: true, error: (model, xhr)=> {
-      debugger
-      model.destroy();
-    }})
-    this.setState({text: "", html: ""})
+    this.state.polls.create(newPoll, {
+      silent: true,
+      success: ()=> {
+        this.buildPollChoices();
+        this.setState({text: "", html: ""});
+      },
+      error: (model, xhr)=> {
+        alert('an error occured');
+        model.destroy();
+      }
+    })
   }
 
   textInputChange(e) {

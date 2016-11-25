@@ -57,16 +57,6 @@ div[contenteditable],
   padding-bottom: 0.765625rem;
 }
 
-.navbar-header #current-user-dropdown {
-  display: inline-block;
-  background-color: #C0C0C0;
-  border: #C0C0C0 1px solid;
-  &>button {
-    border: none;
-    padding: 0.765625rem 1rem;
-  }
-}
-
 .panel {
   .panel-actions {
     background-color: #F6F7F9;

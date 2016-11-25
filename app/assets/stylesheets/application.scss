@@ -18,16 +18,25 @@ $primary_color: white;
 @import "grid_extension";
 @import "polls";
 @import "login";
+@import "users";
 @import "bootstrap_extensions";
+@import url('https://fonts.googleapis.com/css?family=Hind+Siliguri');
+
 
 html {
-  font-size: 16px;
-  letter-spacing: 0.65px;
+  font-size: 14.5px;
+  letter-spacing: 0.45px;
   overflow-y: scroll;
 }
 
 body {
   padding-top: 70px;
+  font-family: 'Hind Siliguri', sans-serif;
+  font-size: 1rem;
+}
+
+[contentEditable]:empty {
+  min-height: 34px
 }
 
 [contentEditable]:empty:not(:focus)::before{
@@ -52,4 +61,24 @@ ul {
 
 label {
   cursor: pointer;
+}
+
+.navbar-header #current-user-dropdown {
+  display: inline-block;
+  background-color: #C0C0C0;
+  vertical-align: top;
+  height: 44.5px;
+  &>button {
+    border: none;
+    padding: 0.765625rem 1rem;
+  }
+}
+
+#dashboard-bg {
+  height: 150px;
+  border-bottom: 1px rgba(200,200,200,0.2) solid;
+}
+
+[class^='media'] {
+  background-color: #C0C0C0;
 }
