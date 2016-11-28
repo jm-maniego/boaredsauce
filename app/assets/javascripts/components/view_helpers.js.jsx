@@ -126,6 +126,18 @@ CharacterLimitCounter.defaultProps = {
 }
 
 class TimeAgo extends React.Component {
+  componentDidMount() {
+    this.timerId = setInterval(() => this.tick(), 1000)
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.timerId);
+  }
+
+  tick() {
+    this.forceUpdate();
+  }
+
   render() {
     return (
       <span>

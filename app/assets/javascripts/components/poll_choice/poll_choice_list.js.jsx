@@ -29,6 +29,7 @@ class PollChoiceFormItem extends React.Component {
           name="poll[poll_choices][][text]"
           placeholder="add an option"
           className="form-control"
+          autoComplete="off"
           onFocus={this.handleFocus} />
       </li>
       )

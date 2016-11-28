@@ -29,9 +29,10 @@
 //= require_tree ./routers
 //= require_tree .
 
-$(document).ready(function() {
-  $("time.timeago").timeago();
-});
+// Not reliable when using react/backbone
+// $(document).ready(function() {
+//   $("time.timeago").timeago();
+// });
 
 $(document).on("click", "a:not([data-bypass])", function(evt) {
   var href = { prop: $(this).prop("href"), attr: $(this).attr("href") };
