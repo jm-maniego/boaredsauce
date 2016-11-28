@@ -1,5 +1,4 @@
 class Api::PollsController < Api::ResourceController
-  before_action :set_poll, only: [:destroy]
   def index
     respond_with Poll.all.includes(:user, :poll_choices)
   end
@@ -11,6 +10,7 @@ class Api::PollsController < Api::ResourceController
   end
 
   def destroy
+    @poll = current_user.polls.find(params[:id])
     @poll.destroy()
     respond_with @poll
   end
