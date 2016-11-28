@@ -67,3 +67,10 @@ div[contenteditable],
 .media-body {
   word-break: break-word;
 }
+
+.media-body {
+  & h5.media-heading {
+    display: inline-block;
+    padding-right: .5rem;
+  }
+}

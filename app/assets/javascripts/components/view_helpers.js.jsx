@@ -124,3 +124,17 @@ CharacterLimitCounter.defaultProps = {
   limit: 145,
   text: ""
 }
+
+class TimeAgo extends React.Component {
+  render() {
+    return (
+      <span>
+        <time
+          className="timeago"
+          dateTime={this.props.time.toISOString()}>
+          {$.timeago(this.props.time)}
+        </time>
+      </span>
+      )
+  }
+}

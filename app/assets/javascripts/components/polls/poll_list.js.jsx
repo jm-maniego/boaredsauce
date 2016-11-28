@@ -72,7 +72,7 @@ class PollForm extends React.Component {
       silent: true,
       success: ()=> {
         this.buildPollChoices();
-        this.setState({html: ""});
+        this.setState({text: "", html: ""});
       },
       error: (model, xhr)=> {
         alert('an error occured');
@@ -184,7 +184,8 @@ class PollMediaUser extends React.Component {
           </div>
           <div className="media-body">
             <div>
-              <h5><a href={Routes.user_path(user)}>{user.fullname()}</a></h5>
+              <h5 className="media-heading"><a href={Routes.user_path(user)}>{user.fullname()}</a></h5>
+              <TimeAgo time={poll.created_at()}/>
             </div>
             <p>
               {poll.get('text')}

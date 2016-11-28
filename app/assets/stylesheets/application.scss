@@ -36,7 +36,7 @@ body {
 }
 
 [contentEditable]:empty {
-  min-height: 34px
+  min-height: 1.5rem
 }
 
 [contentEditable]:empty::before{
@@ -89,4 +89,9 @@ label {
   &.danger {
     color: $brand-danger;
   }
+}
+
+time.timeago {
+  color: #C0C0C0;
+  font-size: .9rem;
 }

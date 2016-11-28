@@ -20,6 +20,7 @@
 //= require react
 //= require react_ujs
 //= require jquery-deparam.min
+//= require jquery.timeago
 //= require_tree ./mixins
 //= require components
 //= require_tree ./extensions
@@ -28,6 +29,9 @@
 //= require_tree ./routers
 //= require_tree .
 
+$(document).ready(function() {
+  $("time.timeago").timeago();
+});
 
 $(document).on("click", "a:not([data-bypass])", function(evt) {
   var href = { prop: $(this).prop("href"), attr: $(this).attr("href") };
