@@ -41,14 +41,14 @@ class PollTable extends React.Component {
 class PollForm extends React.Component {
   constructor(props) {
     super(props);
+    _.extend(this, Boaredsauce.Mixins.FormEvents)
     this.state = {
-      text: "",
       html: "",
       polls: new Boaredsauce.Collections.Polls(),
       poll: new Boaredsauce.Models.Poll()
     }
     this.buildPollChoices();
-    _.extend(this, Boaredsauce.Mixins.FormEvents)
+    this.addNewPollChoice = this.addNewPollChoice.bind(this);
   }
 
   buildPollChoices() {
@@ -57,21 +57,21 @@ class PollForm extends React.Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    if (!(this.state.text.length > 0)) { return }
+    let value = this.textInput.el.innerText.trim()
+    if (!(value.length > 0)) { return }
 
     let $form = $(e.target)
     let form_values = $.deparam($form.serialize())
     let newPoll = new Boaredsauce.Models.Poll(form_values.poll)
     newPoll.set({
-      text: this.state.text,
-      created_at: new Date(),
+      text: value,
       user: Boaredsauce.current_user
     })
     this.state.polls.create(newPoll, {
       silent: true,
       success: ()=> {
         this.buildPollChoices();
-        this.setState({text: "", html: ""});
+        this.setState({html: ""});
       },
       error: (model, xhr)=> {
         alert('an error occured');
@@ -81,10 +81,11 @@ class PollForm extends React.Component {
   }
 
   textInputChange(e) {
-    let target = e.target
-    let value = target.innerText.trim()
+    this.setState({html: e.target.value})
+  }
 
-    this.setState({text: value, html: target.value})
+  addNewPollChoice(e) {
+    this.state.poll.get('poll_choices').add({text: ""});
   }
 
   render() {
@@ -94,18 +95,18 @@ class PollForm extends React.Component {
         <Form
           id="poll-form"
           onSubmit={(e) => this.handleSubmit(e)}>
-          <input type="hidden" name="poll[text]" value={this.state.text} />
           <Panel>
             <PanelBody>
               <FormGroup>
                 <ContentEditable
+                  ref={(textInput) => this.textInput = textInput}
                   data-html={this.state.html}
                   data-placeholder="ask me anything"
                   data-name="html"
                   onChange={(e) => this.textInputChange(e)} />
               </FormGroup>
             </PanelBody>
-            <PollChoicesForm collection={poll_choices}/>
+            <PollChoicesForm collection={poll_choices} onLastItemFocus={this.addNewPollChoice}/>
             <PanelActions>
               <SubmitButton name="poll" />
             </PanelActions>

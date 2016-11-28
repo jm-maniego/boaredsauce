@@ -2,6 +2,9 @@ class Boaredsauce.Models.BaseModel extends Backbone.Model
   belongs_to: []
   has_many: []
 
+  defaults:
+    created_at: new Date()
+
   set: (attributes, options)->
     super
     if typeof attributes == 'string'

@@ -25,9 +25,12 @@
   .list-group-item  {
     padding-top: 0;
     padding-bottom: 0;
-    &> input {
+    &> .form-control {
       border: none;
       box-shadow: none;
+    }
+    &> .form-control:focus::-webkit-input-placeholder {
+      color: rgba(100,100,100, 0.4)
     }
   }
 }

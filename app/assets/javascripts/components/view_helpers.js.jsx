@@ -28,7 +28,7 @@ class ContentEditable extends React.Component {
     props.className = ['form-control', props.className].join(' ')
     return (
       <div {...props}
-        ref={(e) => this.htmlEl = e}
+        ref={(el) => this.el = el}
         contentEditable
         onInput={(e) => this.handleChange(e)}
         onBlur={(e) => this.handleChange(e)}
@@ -38,18 +38,18 @@ class ContentEditable extends React.Component {
 
   shouldComponentUpdate(nextProps) {
     return (
-      !this.htmlEl || ( nextProps['data-html'] !== this.htmlEl.innerHTML && nextProps['data-html'] !== this.props['data-html'] )
+      !this.el || ( nextProps['data-html'] !== this.el.innerHTML && nextProps['data-html'] !== this.props['data-html'] )
     );
   }
 
   componentDidUpdate() {
-    if ( this.htmlEl && this.props['data-html'] !== this.htmlEl.innerHTML ) {
-      this.htmlEl.innerHTML = this.props['data-html'];
+    if ( this.el && this.props['data-html'] !== this.el.innerHTML ) {
+      this.el.innerHTML = this.props['data-html'];
     }
   }
   handleChange(e) {
-    if (!this.htmlEl) return;
-    var html = this.htmlEl.innerHTML;
+    if (!this.el) return;
+    var html = this.el.innerHTML;
     if (html !== this.lastHTML) {
       e.target.value = html
       this.props.onChange && this.props.onChange(e)
