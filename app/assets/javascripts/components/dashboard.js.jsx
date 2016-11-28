@@ -18,7 +18,7 @@ class DashboardProfile extends React.Component {
         <PanelBody>
           <div>
             <a href={user_path} id="dashboard-profile">
-              <img src="" className="media-user"/>
+              <img src="" className="media-object media-user"/>
             </a>
           </div>
           <a href={user_path}>{current_user.fullname()}</a>

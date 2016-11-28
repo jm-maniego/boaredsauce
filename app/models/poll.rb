@@ -9,7 +9,7 @@ class Poll < ApplicationRecord
   ]
 
   validates :text, presence: true
-  validates :text, length: { maximum: 140 }
+  validates :text, length: { maximum: 145 }
   validate :poll_choices_minimum
   validate :poll_choices_maximum
 

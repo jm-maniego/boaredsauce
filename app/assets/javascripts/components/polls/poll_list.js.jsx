@@ -98,6 +98,7 @@ class PollForm extends React.Component {
 
   render() {
     let poll_choices = this.state.poll.get('poll_choices');
+    let limit = Boaredsauce.Models.Poll.limit;
     return (
       <div>
         <Form
@@ -113,7 +114,7 @@ class PollForm extends React.Component {
                   data-placeholder="ask me anything"
                   data-name="html"
                   onChange={(e) => this.textInputChange(e)} />
-                <CharacterLimitCounter className="character-limit-counter" limit={140} text={this.state.text}/>
+                <CharacterLimitCounter className="character-limit-counter" limit={limit} text={this.state.text}/>
               </FormGroup>
             </PanelBody>
             <PollChoicesForm collection={poll_choices} onLastItemFocus={this.addNewPollChoice}/>
@@ -160,19 +161,37 @@ class PollList extends React.Component {
 class PollItem extends React.Component {
   render() {
     let poll = this.props.poll
-    let user = poll.get('user')
     return (
       <Panel className="poll-item">
-        <PanelBody>
-          <div>
-            <h5><a href={Routes.user_path(user)}>{user.fullname()}</a></h5>
-          </div>
-          <p>
-            {poll.get('text')}
-          </p>
-        </PanelBody>
+        <PollMediaUser poll={poll}/>
         <PollChoiceList collection={poll.get('poll_choices')}/>
       </Panel>
+      )
+  }
+}
+
+class PollMediaUser extends React.Component {
+  render() {
+    let poll = this.props.poll
+    let user = poll.get('user')
+    return (
+      <PanelBody>
+        <div className="media">
+          <div className="media-left">
+            <a href="#">
+              <img className="avatar media-object" />
+            </a>
+          </div>
+          <div className="media-body">
+            <div>
+              <h5><a href={Routes.user_path(user)}>{user.fullname()}</a></h5>
+            </div>
+            <p>
+              {poll.get('text')}
+            </p>
+          </div>
+        </div>
+      </PanelBody>
       )
   }
 }

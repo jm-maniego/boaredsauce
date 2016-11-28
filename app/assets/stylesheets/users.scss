@@ -5,11 +5,16 @@
 #dashboard-profile {
   margin-top: -45px;
   display: inline-block;
-  width: 70px;
+  width: 64px;
   &> img {
     display: block;
-    width: 70px;
-    height: 70px;
+    width: 64px;
+    height: 64px;
     border: 1px rgba(200,200,200,0.2) solid;
   }
+}
+
+.avatar {
+  width: 48px;
+  height: 48px;
 }

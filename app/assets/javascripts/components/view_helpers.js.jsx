@@ -110,13 +110,17 @@ class CharacterLimitCounter extends React.Component {
   render() {
     let limit = this.props.limit;
     let characters_count = limit - this.props.text.length;
+    let classes = this.props.className;
+    if (this.props.text.length > limit) {
+      classes += " danger";
+    }
     return (
-      <span className={this.props.className}>{characters_count}</span>
+      <span className={classes}>{characters_count}</span>
       )
   }
 }
 
 CharacterLimitCounter.defaultProps = {
-  limit: 140,
+  limit: 145,
   text: ""
 }

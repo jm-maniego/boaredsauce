@@ -20,7 +20,7 @@ h1, h2, h3, h4, h5, h6 {
 .form-control,
 div[contenteditable],
 .btn, [class^='media-'],
-.dropdown-menu {
+.dropdown-menu, .avatar {
   border-radius: 1.7px;
 }
 
@@ -62,4 +62,8 @@ div[contenteditable],
     background-color: #F6F7F9;
     padding: .375rem 15px;
   }
+}
+
+.media-body {
+  word-break: break-word;
 }

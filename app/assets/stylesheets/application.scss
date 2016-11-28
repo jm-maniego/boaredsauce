@@ -78,11 +78,15 @@ label {
   border-bottom: 1px rgba(200,200,200,0.2) solid;
 }
 
-[class^='media'] {
+.media-object {
   background-color: #C0C0C0;
 }
 
 .character-limit-counter {
   float: right;
   color: rgba(100,100,100, 0.4);
+
+  &.danger {
+    color: $brand-danger;
+  }
 }
