@@ -30,7 +30,10 @@
       box-shadow: none;
     }
     &> .form-control:focus::-webkit-input-placeholder {
-      color: rgba(100,100,100, 0.4)
+      color: rgba(100,100,100, 0.4);
+    }
+    &> .form-control:focus::-moz-placeholder {
+      color: rgba(100,100,100, 0.4);
     }
   }
 }
