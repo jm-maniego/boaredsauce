@@ -140,12 +140,31 @@ class TimeAgo extends React.Component {
 
   render() {
     return (
-      <span>
+      <span className="timeago-wrapper">
         <time
           className="timeago"
           dateTime={this.props.time.toISOString()}>
           {$.timeago(this.props.time)}
         </time>
+      </span>
+      )
+  }
+}
+
+class DropdownButton extends React.Component {
+  render() {
+    let name = this.props.name && `${this.props.name} `
+    let className = ['btn-group', this.props.className].join(' ')
+    let dropdownClass = ['dropdown-menu', this.props.dropdownMenuClass].join(' ')
+    return (
+      <span className={className}>
+        <button type="button" className="btn btn-default dropdown-toggle" data-toggle="dropdown">
+          {name}
+          <span className="caret"></span>
+        </button>
+        <ul className={dropdownClass}>
+          {this.props.children}
+        </ul>
       </span>
       )
   }

@@ -29,6 +29,12 @@ div[contenteditable],
   padding: 3.5px 11.5px;
 }
 
+.btn-group {
+  .btn {
+    min-width: auto;
+  }
+}
+
 .topbar {
   nav {
     background-color: $primary_color;
@@ -73,4 +79,8 @@ div[contenteditable],
     display: inline-block;
     padding-right: .5rem;
   }
+}
+
+.caret {
+  color: gray;
 }

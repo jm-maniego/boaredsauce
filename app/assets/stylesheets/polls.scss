@@ -7,11 +7,18 @@
   background-color: white;
   p {
     word-wrap: break-word;
-    font-size: 1.5rem;
+    font-size: 1.7931034483rem;
   }
   .list-group-item {
     cursor: pointer;
     &:hover {background-color: #F6F7F9}
+  }
+
+  .story-option {
+    float: right;
+    & > button {
+      border: 0;
+    }
   }
 }
 
@@ -29,8 +36,11 @@
       border: none;
       box-shadow: none;
     }
+    &> .form-control::-webkit-input-placeholder {
+      color: rgba(100,100,100, .5);
+    }
     &> .form-control:focus::-webkit-input-placeholder {
-      color: rgba(100,100,100, 0.4);
+      color: rgba(100,100,100, 0.2);
     }
     &> .form-control:focus::-moz-placeholder {
       color: rgba(100,100,100, 0.4);

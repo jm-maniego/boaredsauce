@@ -171,6 +171,15 @@ class PollItem extends React.Component {
 }
 
 class PollMediaUser extends React.Component {
+  constructor(props) {
+    super(props);
+    this.destroyPoll = this.destroyPoll.bind(this);
+  }
+
+  destroyPoll() {
+    this.props.poll.destroy();
+  }
+
   render() {
     let poll = this.props.poll
     let user = poll.get('user')
@@ -184,8 +193,12 @@ class PollMediaUser extends React.Component {
           </div>
           <div className="media-body">
             <div>
-              <h5 className="media-heading"><a href={Routes.user_path(user)}>{user.fullname()}</a></h5>
+              <h5 className="media-heading">
+                <a href={Routes.user_path(user)}>{user.fullname()}</a></h5>
               <TimeAgo time={poll.created_at()}/>
+              <DropdownButton className="story-option" dropdownMenuClass="dropdown-menu-right">
+                <li><a onClick={this.destroyPoll} href="#">Delete</a></li>
+              </DropdownButton>
             </div>
             <p>
               {poll.get('text')}
