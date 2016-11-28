@@ -79,7 +79,7 @@ class Panel extends React.Component {
 class PanelBody extends React.Component {
   render() {
     return(
-      <div className="panel-body">
+      <div {...this.props} className="panel-body">
         {this.props.children}
       </div>
       )
@@ -104,4 +104,19 @@ class BSRow extends React.Component {
       </div>
       )
   }
+}
+
+class CharacterLimitCounter extends React.Component {
+  render() {
+    let limit = this.props.limit;
+    let characters_count = limit - this.props.text.length;
+    return (
+      <span className={this.props.className}>{characters_count}</span>
+      )
+  }
+}
+
+CharacterLimitCounter.defaultProps = {
+  limit: 140,
+  text: ""
 }

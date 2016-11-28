@@ -39,7 +39,7 @@ body {
   min-height: 34px
 }
 
-[contentEditable]:empty:not(:focus)::before{
+[contentEditable]:empty::before{
   content: attr(data-placeholder);
   opacity: 0.5;
 }
@@ -67,10 +67,9 @@ label {
   display: inline-block;
   background-color: #C0C0C0;
   vertical-align: top;
-  height: 44.5px;
   &>button {
     border: none;
-    padding: 0.765625rem 1rem;
+    padding: 0.824137931rem 1rem;
   }
 }
 
@@ -81,4 +80,9 @@ label {
 
 [class^='media'] {
   background-color: #C0C0C0;
+}
+
+.character-limit-counter {
+  float: right;
+  color: rgba(100,100,100, 0.4);
 }

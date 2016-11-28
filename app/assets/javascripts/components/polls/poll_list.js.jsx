@@ -49,6 +49,7 @@ class PollForm extends React.Component {
     }
     this.buildPollChoices();
     this.addNewPollChoice = this.addNewPollChoice.bind(this);
+    this.focusToText = this.focusToText.bind(this);
   }
 
   buildPollChoices() {
@@ -80,8 +81,15 @@ class PollForm extends React.Component {
     })
   }
 
+  focusToText() {
+    this.textInput.el.focus();
+  }
+
   textInputChange(e) {
-    this.setState({html: e.target.value})
+    let target = e.target;
+    let value = target.innerText.trim();
+
+    this.setState({text: value, html: target.value})
   }
 
   addNewPollChoice(e) {
@@ -96,14 +104,16 @@ class PollForm extends React.Component {
           id="poll-form"
           onSubmit={(e) => this.handleSubmit(e)}>
           <Panel>
-            <PanelBody>
+            <PanelBody id="poll-text-wrapper" onClick={this.focusToText}>
               <FormGroup>
                 <ContentEditable
+                  id="poll-text"
                   ref={(textInput) => this.textInput = textInput}
                   data-html={this.state.html}
                   data-placeholder="ask me anything"
                   data-name="html"
                   onChange={(e) => this.textInputChange(e)} />
+                <CharacterLimitCounter className="character-limit-counter" limit={140} text={this.state.text}/>
               </FormGroup>
             </PanelBody>
             <PollChoicesForm collection={poll_choices} onLastItemFocus={this.addNewPollChoice}/>

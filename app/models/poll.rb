@@ -11,6 +11,7 @@ class Poll < ApplicationRecord
   validates :text, presence: true
   validates :text, length: { maximum: 140 }
   validate :poll_choices_minimum
+  validate :poll_choices_maximum
 
   accepts_nested_attributes_for :poll_choices, reject_if: ->(attributes) { attributes['text'].strip.blank? }
 
@@ -18,5 +19,9 @@ class Poll < ApplicationRecord
 
     def poll_choices_minimum
       errors.add(:poll_choices, "must be at least 2") if poll_choices.size < 2
+    end
+
+    def poll_choices_maximum
+      errors.add(:poll_choices, "are too many (maximum of 10)") if poll_choices.size > 10
     end
 end
