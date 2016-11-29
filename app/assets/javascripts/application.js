@@ -34,6 +34,10 @@
 //   $("time.timeago").timeago();
 // });
 
+$(document).on('click', ".btn-checkbox", function(e) {
+  e.stopPropagation();
+});
+
 $(document).on("click", "a:not([data-bypass])", function(evt) {
   var href = { prop: $(this).prop("href"), attr: $(this).attr("href") };
   var root = location.protocol + "//" + location.host + Backbone.history.options.root;

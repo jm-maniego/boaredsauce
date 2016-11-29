@@ -8,12 +8,23 @@ class Poll < ApplicationRecord
     :rating
   ]
 
+  ACCESSIBLE_ATTRIBUTES = [
+    :text,
+    :allow_add,
+    :multiple_choice
+  ]
+
   validates :text, presence: true
   validates :text, length: { maximum: 145 }
   validate :poll_choices_minimum
   validate :poll_choices_maximum
 
   accepts_nested_attributes_for :poll_choices, reject_if: ->(attributes) { attributes['text'].strip.blank? }
+
+  def multiple_choice=(multiple_choice)
+    is_multiple_choice = ['true', '1', 1, true, 'multiple_choice'].include?(multiple_choice)
+    self.question_type = is_multiple_choice ?  'multiple_choice' : 'checkbox'
+  end
 
   private
 

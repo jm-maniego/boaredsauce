@@ -29,6 +29,12 @@
     padding-top: 1.3rem;
   }
 
+  .panel-actions {
+    &> .btn, &> .btn-group {
+      margin-right: .5rem;
+    }
+  }
+
   .list-group-item  {
     padding-top: 0;
     padding-bottom: 0;
@@ -61,4 +67,8 @@
 
 #poll-text-wrapper {
   cursor: text;
+}
+
+.dropdown-menu a {
+  text-align: left;
 }

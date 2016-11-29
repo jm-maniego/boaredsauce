@@ -169,3 +169,31 @@ class DropdownButton extends React.Component {
       )
   }
 }
+
+class ButtonCheckbox extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      checked: false
+    }
+    this.toggle = this.toggle.bind(this);
+  }
+
+  toggle(e) {
+    this.setState({checked: !this.state.checked});
+  }
+
+  render() {
+    let stateClasses = {
+      'glyphicon-unchecked': !this.state.checked,
+      'glyphicon-check': this.state.checked,
+    }
+    let className = "glyphicon " + _(stateClasses).classes();
+    return (
+      <a onClick={this.toggle} href='#' className="btn btn-default btn-checkbox">
+        <span className={className}></span> {this.props.title}
+        <input type="hidden" name={this.props.name} value={this.state.checked}/>
+      </a>
+      )
+  }
+}

@@ -22,6 +22,8 @@ class Api::PollsController < Api::ResourceController
     end
 
     def poll_params
-      params.require(:poll).permit(:text, poll_choices_attributes: PollChoice::ACCESSIBLE_ATTRIBUTES)
+      params.require(:poll).permit(
+        Poll::ACCESSIBLE_ATTRIBUTES,
+        poll_choices_attributes: PollChoice::ACCESSIBLE_ATTRIBUTES)
     end
 end

@@ -123,6 +123,10 @@ class PollForm extends React.Component {
             <PollChoicesForm collection={poll_choices} onLastItemFocus={this.addNewPollChoice}/>
             <PanelActions>
               <SubmitButton name="poll" />
+              <DropdownButton name="poll options">
+                <li><ButtonCheckbox title="multiple choice" name="poll[multiple_choice]" /></li>
+                <li><ButtonCheckbox title="allow people to add options" name="poll[allow_add]" /></li>
+              </DropdownButton>
             </PanelActions>
           </Panel>
         </Form>

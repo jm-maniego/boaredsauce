@@ -95,3 +95,19 @@ time.timeago {
   color: #C0C0C0;
   font-size: .9rem;
 }
+
+.dropdown-menu {
+  .btn-checkbox {
+    border: none;
+  }
+}
+
+.active, .btn-group.open .dropdown-toggle {
+  box-shadow: none;
+}
+
+.btn-checkbox {
+  .glyphicon {
+    top: 1.25px;
+  }
+}
