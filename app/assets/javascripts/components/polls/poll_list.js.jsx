@@ -93,7 +93,10 @@ class PollForm extends React.Component {
   }
 
   addNewPollChoice(e) {
-    this.state.poll.get('poll_choices').add({text: ""});
+    let poll_choices = this.state.poll.get('poll_choices')
+    if (poll_choices.length < this.state.poll.poll_choices_limit) {
+      this.state.poll.get('poll_choices').add({text: ""});
+    }
   }
 
   render() {
