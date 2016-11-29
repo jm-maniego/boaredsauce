@@ -180,7 +180,9 @@ class PollMediaUser extends React.Component {
   }
 
   destroyPoll() {
-    this.props.poll.destroy();
+    if (confirm("are you sure you want to delete this poll?")) {
+      this.props.poll.destroy();
+    }
   }
 
   render() {
