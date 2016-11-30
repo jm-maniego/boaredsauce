@@ -44,12 +44,17 @@ class PollForm extends React.Component {
     _.extend(this, Boaredsauce.Mixins.FormEvents)
     this.state = {
       html: "",
+      text: "",
       polls: new Boaredsauce.Collections.Polls(),
-      poll: new Boaredsauce.Models.Poll()
+      poll: new Boaredsauce.Models.Poll(),
+      focused: false
     }
     this.buildPollChoices();
     this.addNewPollChoice = this.addNewPollChoice.bind(this);
     this.focusToText = this.focusToText.bind(this);
+    this.handleFocus = this.handleFocus.bind(this);
+    this.handleBlur = this.handleBlur.bind(this);
+    this.handleMouseDown = this.handleMouseDown.bind(this);
   }
 
   buildPollChoices() {
@@ -85,6 +90,23 @@ class PollForm extends React.Component {
     this.textInput.el.focus();
   }
 
+  handleFocus(e) {
+    this.setState({focused: true})
+  }
+
+  handleMouseDown(e) {
+    this.nextTarget = e.target;
+  }
+
+  handleBlur() {
+    if (this.nextTarget) {
+      this.nextTarget.focus();
+      this.nextTarget = null;
+    } else {
+      this.setState({focused: false})
+    }
+  }
+
   textInputChange(e) {
     let target = e.target;
     let value = target.innerText.trim();
@@ -102,12 +124,16 @@ class PollForm extends React.Component {
   render() {
     let poll_choices = this.state.poll.get('poll_choices');
     let limit = Boaredsauce.Models.Poll.limit;
+    let formStateClasses = {
+      "hidden": !this.state.focused
+    }
+    formStateClasses = _(formStateClasses).classes();
     return (
       <div>
         <Form
           id="poll-form"
           onSubmit={(e) => this.handleSubmit(e)}>
-          <Panel>
+          <Panel onBlur={this.handleBlur} onMouseDown={this.handleMouseDown}>
             <PanelBody id="poll-text-wrapper" onClick={this.focusToText}>
               <FormGroup>
                 <ContentEditable
@@ -116,12 +142,13 @@ class PollForm extends React.Component {
                   data-html={this.state.html}
                   data-placeholder="ask me anything"
                   data-name="html"
+                  onFocus={this.handleFocus}
                   onChange={(e) => this.textInputChange(e)} />
                 <CharacterLimitCounter className="character-limit-counter" limit={limit} text={this.state.text}/>
               </FormGroup>
             </PanelBody>
-            <PollChoicesForm collection={poll_choices} onLastItemFocus={this.addNewPollChoice}/>
-            <PanelActions>
+            <PollChoicesForm className={formStateClasses} collection={poll_choices} onLastItemFocus={this.addNewPollChoice}/>
+            <PanelActions className={formStateClasses}>
               <SubmitButton name="poll" />
               <DropdownButton name="poll options">
                 <li><ButtonCheckbox title="multiple choice" name="poll[multiple_choice]" /></li>

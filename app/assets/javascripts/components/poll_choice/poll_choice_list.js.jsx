@@ -53,8 +53,9 @@ class PollChoicesForm extends React.Component {
 
   render() {
     var onFocusProp = {onFocus: ""};
+    let className = ["list-group", this.props.className].join(' ');
     return (
-      <ul className="list-group">
+      <ul className={className}>
         {this.props.collection.map((poll_choice, i)=> {
           if (i == (this.props.collection.length - 1)) {
             onFocusProp['onFocus'] = this.handleLastItemFocus

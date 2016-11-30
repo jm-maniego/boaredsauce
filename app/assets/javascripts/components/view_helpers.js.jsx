@@ -23,6 +23,10 @@ class FormGroup extends React.Component {
 // http://stackoverflow.com/questions/22677931/react-js-onchange-event-for-contenteditable
 // https://github.com/lovasoa/react-contenteditable/blob/master/src/react-contenteditable.js
 class ContentEditable extends React.Component {
+  constructor(props) {
+    super(props);
+    this.handleBlur = this.handleBlur.bind(this);
+  }
   render() {
     let props = _.extend({}, this.props)
     props.className = ['form-control', props.className].join(' ')
@@ -31,7 +35,7 @@ class ContentEditable extends React.Component {
         ref={(el) => this.el = el}
         contentEditable
         onInput={(e) => this.handleChange(e)}
-        onBlur={(e) => this.handleChange(e)}
+        onBlur={(e) => this.handleBlur(e)}
         dangerouslySetInnerHTML={{__html: this.props['data-html']}}></div>
     )
   }
@@ -47,6 +51,12 @@ class ContentEditable extends React.Component {
       this.el.innerHTML = this.props['data-html'];
     }
   }
+
+  handleBlur(e) {
+    this.handleChange(e);
+    this.props.onBlur && this.props.onBlur(e);
+  }
+
   handleChange(e) {
     if (!this.el) return;
     var html = this.el.innerHTML;
@@ -88,8 +98,9 @@ class PanelBody extends React.Component {
 
 class PanelActions extends React.Component {
   render() {
+    let className = ['panel-actions', this.props.className].join(' ')
     return (
-      <div className="panel-actions">
+      <div className={className}>
         {this.props.children}
       </div>
       )
