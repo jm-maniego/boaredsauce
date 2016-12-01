@@ -54,7 +54,6 @@ class PollForm extends React.Component {
     this.focusToText = this.focusToText.bind(this);
     this.handleFocus = this.handleFocus.bind(this);
     this.handleBlur = this.handleBlur.bind(this);
-    this.handleMouseDown = this.handleMouseDown.bind(this);
   }
 
   buildPollChoices() {
@@ -77,6 +76,7 @@ class PollForm extends React.Component {
       silent: true,
       success: ()=> {
         this.buildPollChoices();
+        this.handleBlur();
         this.setState({text: "", html: ""});
       },
       error: (model, xhr)=> {
@@ -91,20 +91,11 @@ class PollForm extends React.Component {
   }
 
   handleFocus(e) {
-    this.setState({focused: true})
-  }
-
-  handleMouseDown(e) {
-    this.nextTarget = e.target;
+    this.setState({focused: true});
   }
 
   handleBlur() {
-    if (this.nextTarget) {
-      this.nextTarget.focus();
-      this.nextTarget = null;
-    } else {
-      this.setState({focused: false})
-    }
+    this.setState({focused: false});
   }
 
   textInputChange(e) {
@@ -133,7 +124,7 @@ class PollForm extends React.Component {
         <Form
           id="poll-form"
           onSubmit={(e) => this.handleSubmit(e)}>
-          <Panel onBlur={this.handleBlur} onMouseDown={this.handleMouseDown}>
+          <Panel>
             <PanelBody id="poll-text-wrapper" onClick={this.focusToText}>
               <FormGroup>
                 <ContentEditable
