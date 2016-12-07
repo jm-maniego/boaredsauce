@@ -20,7 +20,7 @@ class PollScreen extends React.Component {
         </div>
 
         <div className="col-xs-3">
-          <Dashboard />
+          <SideBar />
         </div>
       </BSRow>
       )
