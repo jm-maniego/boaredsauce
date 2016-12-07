@@ -9,8 +9,7 @@
 jm = User.find_or_create_by(email: 'jmmaniego@hotmail.com') do |user|
   user.first_name = "Juan Miguel"
   user.last_name  = "Maniego"
-  password = user.password = 'p@ssword',
-  user.password_confirmation = password
+  password = user.password = 'p@ssword'
 end
 
 poll_choices = [
