@@ -5,7 +5,7 @@ body.sessions, body.registrations {
     margin: 0 auto;
   }
 
-  [class^="col-"].form-group {
+  [class*="col-"].form-group {
     .form-control {
       width: 100%;
     }

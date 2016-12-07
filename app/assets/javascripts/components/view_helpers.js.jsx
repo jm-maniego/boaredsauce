@@ -70,7 +70,7 @@ class ContentEditable extends React.Component {
 
 class SubmitButton extends React.Component {
   render() {
-    return (<button type="submit" className="btn btn-default">{this.props.name}</button>)
+    return (<button type="submit" className="btn btn-primary">{this.props.name}</button>)
   }
 }
 

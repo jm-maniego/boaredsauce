@@ -15,7 +15,7 @@ class PollScreen extends React.Component {
           </Panel>
         </div>
 
-        <div id="content-container" className="col-xs-6">
+        <div id="content-container" className="col-xs-7">
           <PollTable polls={polls}/>
         </div>
 
