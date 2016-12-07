@@ -18,9 +18,10 @@ class Api::ResourcePresenter
   end
 
   def as_json(options={})
+    included_associations = [*options.fetch(:include, [])]
     options = (options||{}).merge({
       only: klass.allowed_attributes,
-      include: klass.included_associations
+      include: included_associations + klass.included_associations
       })
     @object.serializable_hash_without_presenter(options)
   end

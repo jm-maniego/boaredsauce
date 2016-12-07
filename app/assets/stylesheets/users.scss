@@ -19,3 +19,21 @@
   width: 48px;
   height: 48px;
 }
+
+#profile-banner {
+  height: 24.1379310345rem;
+  border: 1px red solid;
+  margin-bottom: 1rem;
+}
+
+#profile-card {
+  border: 1px red solid;
+  height: 20rem;
+  margin-top: -9rem;
+}
+
+#profile-actions {
+  .btn {
+    width: 100%;
+  }
+}

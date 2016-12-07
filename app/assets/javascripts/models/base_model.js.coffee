@@ -33,7 +33,9 @@ class Boaredsauce.Models.BaseModel extends Backbone.Model
 
     _.each([@belongs_to, @has_many], ((associations)->
       _.each(associations, ((association_str) ->
-        json["#{association_str}_attributes"] = @get(association_str).toJSON(options)
+        association = @get(association_str)
+        if (association)
+          json["#{association_str}_attributes"] = association.toJSON(options)
         delete json[association_str]
       ), this)
     ), this)
