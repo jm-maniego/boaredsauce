@@ -3,9 +3,9 @@ class Boaredsauce.Routers.Polls extends Backbone.Router
     '': 'index'
 
   initialize: ->
-    @polls = Boaredsauce.polls || new Boaredsauce.Collections.Polls()
+    @polls = new Boaredsauce.Collections.Polls()
 
   index: ->
     view  = new Boaredsauce.Views.PollsIndex(collection: @polls)
-    @polls.this_or_fetch()
+    @polls.fetch()
     $('#main-container').html(view.render().el)
