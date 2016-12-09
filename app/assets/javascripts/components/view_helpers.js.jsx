@@ -208,3 +208,11 @@ class ButtonCheckbox extends React.Component {
       )
   }
 }
+
+class Badge extends React.Component {
+  render() {
+    return (
+      <span className="badge">{this.props.count}</span>
+      )
+  }
+}

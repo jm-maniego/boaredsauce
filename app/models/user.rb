@@ -5,6 +5,8 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :trackable, :validatable
 
   has_many :polls
+  has_many :responses, foreign_key: :respondent_id
+  has_many :poll_choices, through: :responses
 
   def initials
     fname_a, fname_b = first_name.split(/\s/)[0..1]

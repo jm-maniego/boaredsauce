@@ -8,7 +8,9 @@ module ApiPresentable
 
     alias_method :serializable_hash_without_presenter, :serializable_hash
     def serializable_hash(options=nil)
-      resource_presenter.new(self).as_json(options)
+      options ||= {}
+      context = options[:context]
+      resource_presenter.new(self, context).as_json(options)
     end
   end
 

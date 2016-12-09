@@ -1,11 +1,55 @@
 class PollChoiceList extends React.Component {
+  constructor(props) {
+    super(props);
+    this.handleClick = this.handleClick.bind(this);
+  }
+
+  handleClick() {
+  }
+
   render() {
     return (
       <ul className="list-group">
         {this.props.collection.map((poll_choice)=> {
-          return <li key={poll_choice.cid} className="list-group-item">{poll_choice.get('text')}</li>
+          return <PollChoiceItem key={poll_choice.cid} poll_choice={poll_choice} />
         })}
       </ul>
+      )
+  }
+}
+
+class PollChoiceItem extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      selected: false
+    }
+    this.handleClick = this.handleClick.bind(this);
+    _.extend(this, Boaredsauce.Mixins.BackboneMixin)
+  }
+
+  modelOrCollection() {
+    return this.props.poll_choice
+  }
+
+  handleClick(e) {
+    this.props.onClick && this.props.onClick(e);
+    this.props.poll_choice.answer();
+  }
+
+  render() {
+    let poll_choice = this.props.poll_choice;
+    let className = {
+      'selected': poll_choice.get('answered')
+    }
+    className = 'list-group-item btn ' + _(className).classes();
+    let respondents = poll_choice.get('respondents')
+    let responses_count = respondents.length
+    return (
+      <li onClick={this.handleClick}
+          className={className}>{poll_choice.get('text')}
+          <Badge count={responses_count}/>
+      </li>
       )
   }
 }
@@ -61,7 +105,10 @@ class PollChoicesForm extends React.Component {
             onFocusProp['onFocus'] = this.handleLastItemFocus
           }
           return (
-            <PollChoiceFormItem {...onFocusProp} key={poll_choice.cid} poll_choice={poll_choice}/>
+            <PollChoiceFormItem
+              {...onFocusProp}
+              key={poll_choice.cid}
+              poll_choice={poll_choice}/>
             )
         })}
       </ul>

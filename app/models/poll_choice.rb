@@ -1,5 +1,7 @@
 class PollChoice < ApplicationRecord
   belongs_to :poll, inverse_of: :poll_choices
+  has_many :responses
+  has_many :respondents, through: :responses
 
   ACCESSIBLE_ATTRIBUTES = [:id, :text]
 

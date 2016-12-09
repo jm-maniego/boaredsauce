@@ -12,9 +12,14 @@ Rails.application.routes.draw do
 
   resources :users, only: [:show], controller: 'users'
   resources :polls
-  namespace :api do
-    resources :polls, defaults: {format: :json}
-    resources :users, defaults: {format: :json}
+  namespace :api, defaults: {format: :json} do
+    resources :polls
+    resources :poll_choices, only: [] do
+      member do
+        post :answer
+      end
+    end
+    resources :users, only: [:show]
   end
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

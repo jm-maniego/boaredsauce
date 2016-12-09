@@ -13,20 +13,30 @@ class Api::ResourcePresenter
     end
   end
 
-  def initialize(object)
+  def initialize(object, context)
     @object = object
+    @context = context
   end
 
   def as_json(options={})
-    included_associations = [*options.fetch(:include, [])]
-    options = (options||{}).merge({
+    context_option = options.slice(:context)
+    included_associations = [*options.fetch(:include, [])] + klass.included_associations
+    included_associations = included_associations.map do |key|
+      key.merge(context_option)
+    end
+
+    options = options.merge({
       only: klass.allowed_attributes,
-      include: included_associations + klass.included_associations
+      include: included_associations
       })
     @object.serializable_hash_without_presenter(options)
   end
 
   def klass
     self.class
+  end
+
+  def context
+    @context
   end
 end
