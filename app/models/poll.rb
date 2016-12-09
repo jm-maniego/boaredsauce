@@ -2,11 +2,7 @@ class Poll < ApplicationRecord
   belongs_to :user
   has_many :poll_choices, inverse_of: :poll, dependent: :destroy
 
-  TYPES = [
-    :multiple_choice, # actually, a radio button
-    :checkbox,
-    :rating
-  ]
+  TYPES = %w(multiple_choice checkbox rating)
 
   ACCESSIBLE_ATTRIBUTES = [
     :text,
@@ -18,6 +14,7 @@ class Poll < ApplicationRecord
   validates :text, length: { maximum: 145 }
   validate :poll_choices_minimum
   validate :poll_choices_maximum
+  validates :question_type, inclusion: { in: TYPES }
 
   accepts_nested_attributes_for :poll_choices, reject_if: ->(attributes) { attributes['text'].strip.blank? }
 

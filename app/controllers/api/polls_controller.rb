@@ -1,6 +1,6 @@
 class Api::PollsController < Api::ResourceController
   def index
-    respond_with Poll.all.includes(:user, :poll_choices)
+    respond_with Poll.all.includes(:user, poll_choices: :respondents), context: current_user
   end
 
   def create
@@ -16,10 +16,6 @@ class Api::PollsController < Api::ResourceController
   end
 
   private
-
-    def set_poll
-      @poll = Poll.find(params[:id])
-    end
 
     def poll_params
       params.require(:poll).permit(
