@@ -22,18 +22,27 @@
 
 #profile-banner {
   height: 24.1379310345rem;
-  border: 1px red solid;
   margin-bottom: 1rem;
+  background-color: #C0C0C0;
 }
 
 #profile-card {
-  border: 1px red solid;
-  height: 20rem;
-  margin-top: -9rem;
+  height: 24rem;
+  margin-top: -8rem;
 }
 
 #profile-actions {
   .btn {
     width: 100%;
   }
+}
+
+#profile-pic-wrapper {
+  margin-right: 1.7rem;
+  background-color: #C0C0C0;
+  height: 19rem;
+  border: 1px rgba(200,200,200,0.2) solid;
+  -moz-box-shadow:    5px 0px 50px -10px #585858;
+  -webkit-box-shadow: 5px 0px 50px -10px #585858;
+  box-shadow:         5px 0px 50px -10px #585858;
 }

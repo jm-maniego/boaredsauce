@@ -11,7 +11,8 @@
   }
   .list-group-item {
     cursor: pointer;
-    &:hover {background-color: #F6F7F9}
+    text-align: left;
+    &.selected, &:hover {background-color: #F6F7F9}
   }
 
   .story-option {
@@ -46,10 +47,10 @@
       color: rgba(100,100,100, .5);
     }
     &> .form-control:focus::-webkit-input-placeholder {
-      color: rgba(100,100,100, 0.2);
+      color: rgba(100,100,100, 0.3);
     }
     &> .form-control:focus::-moz-placeholder {
-      color: rgba(100,100,100, 0.4);
+      color: rgba(100,100,100, 0.3);
     }
   }
 }

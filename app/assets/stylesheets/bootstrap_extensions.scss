@@ -19,12 +19,13 @@ h1, h2, h3, h4, h5, h6 {
 .panel, textarea,
 .form-control,
 div[contenteditable],
-.btn, [class*='media-'],
+button.btn, a.btn, input.btn,
+[class*='media-'],
 .dropdown-menu, .avatar {
   border-radius: 1.7px;
 }
 
-.btn {
+button.btn, a.btn {
   min-width: 65px;
   padding: 3.5px 11.5px;
   padding-top: 4px;

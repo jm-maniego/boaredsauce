@@ -22,8 +22,8 @@ $primary_color: white;
 @import "bootstrap_extensions";
 @import url('https://fonts.googleapis.com/css?family=Hind+Siliguri');
 
-
 html {
+  height: 100%;
   font-size: 14.5px;
   letter-spacing: 0.45px;
   overflow-y: scroll;
@@ -33,6 +33,7 @@ body {
   padding-top: 70px;
   font-family: 'Hind Siliguri', sans-serif;
   font-size: 1rem;
+  min-height: 100%;
 }
 
 [contentEditable]:empty {
@@ -112,4 +113,8 @@ time.timeago {
   .glyphicon {
     top: 1.25px;
   }
+}
+
+[data-href] {
+  cursor: pointer;
 }

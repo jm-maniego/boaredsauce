@@ -201,7 +201,7 @@ class PollMediaUser extends React.Component {
     this.destroyPoll = this.destroyPoll.bind(this);
   }
 
-  destroyPoll() {
+  destroyPoll(e) {
     if (confirm("are you sure you want to delete this poll?")) {
       this.props.poll.destroy();
     }
@@ -210,21 +210,22 @@ class PollMediaUser extends React.Component {
   render() {
     let poll = this.props.poll
     let user = poll.get('user')
+    let user_path = Routes.user_path(user);
     return (
       <PanelBody>
         <div className="media">
           <div className="media-left">
-            <a href="#">
+            <a href={user_path}>
               <img className="avatar media-object" />
             </a>
           </div>
           <div className="media-body">
             <div>
               <h5 className="media-heading">
-                <a href={Routes.user_path(user)}>{user.fullname()}</a></h5>
+                <a href={user_path}>{user.fullname()}</a></h5>
               <TimeAgo time={poll.created_at()}/>
               <DropdownButton className="story-option" dropdownMenuClass="dropdown-menu-right">
-                <li><a onClick={this.destroyPoll} href="#">Delete</a></li>
+                <li><a onClick={this.destroyPoll} data-href>Delete</a></li>
               </DropdownButton>
             </div>
             <p>

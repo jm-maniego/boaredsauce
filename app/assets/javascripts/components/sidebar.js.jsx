@@ -5,7 +5,11 @@ class SideBar extends React.Component {
 
     return (
       <div id="sidebar">
-        <a href={user_path}>{current_user.fullname()}</a>
+        <Panel>
+          <PanelBody>
+            <a href={user_path}>{current_user.fullname()}</a>
+          </PanelBody>
+        </Panel>
       </div>
       )
   }
