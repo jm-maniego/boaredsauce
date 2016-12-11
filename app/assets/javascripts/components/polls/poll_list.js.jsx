@@ -186,10 +186,12 @@ class PollList extends React.Component {
 class PollItem extends React.Component {
   render() {
     let poll = this.props.poll
+    let question_type = poll.get('question_type');
+
     return (
       <Panel className="poll-item">
         <PollMediaUser poll={poll}/>
-        <PollChoiceList collection={poll.get('poll_choices')}/>
+        <PollChoiceList question_type={question_type} collection={poll.get('poll_choices')}/>
       </Panel>
       )
   }

@@ -10,9 +10,13 @@ class PollChoiceList extends React.Component {
   render() {
     return (
       <ul className="list-group">
-        {this.props.collection.map((poll_choice)=> {
-          return <PollChoiceItem key={poll_choice.cid} poll_choice={poll_choice} />
-        })}
+        <Form>
+          {this.props.collection.map((poll_choice)=> {
+          return <PollChoiceItem question_type={this.props.question_type}
+                                 key={poll_choice.cid}
+                                 poll_choice={poll_choice} />
+          })}
+        </Form>
       </ul>
       )
   }
@@ -42,14 +46,18 @@ class PollChoiceItem extends React.Component {
     let className = {
       'selected': poll_choice.get('answered')
     }
-    className = 'list-group-item btn ' + _(className).classes();
+    className = 'list-group-item btn ';
     let respondents = poll_choice.get('respondents')
     let responses_count = respondents.length
+    let id = `poll-choice-${poll_choice.cid}`
+
     return (
-      <li onClick={this.handleClick}
-          className={className}>{poll_choice.get('text')}
+      <label onClick={this.handleClick}
+             className={className}>
+          <input id={id} type={this.props.question_type} name="poll_choice" />
+          {poll_choice.get('text')}
           <Badge count={responses_count}/>
-      </li>
+      </label>
       )
   }
 }

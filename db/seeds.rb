@@ -24,7 +24,11 @@ polls = [
   "Am I doing it right?",
   "Popcorn anyone?",
   "Who's your daddy?"
-].map {|poll_text| {text: poll_text, poll_choices_attributes: poll_choices}}
+].map {|poll_text| {
+  text: poll_text,
+  poll_choices_attributes: poll_choices,
+  question_type: 'radio'
+  }}
 
 Poll.create!(polls) do |poll|
   poll.user = jm

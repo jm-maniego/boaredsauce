@@ -2,7 +2,7 @@ class Poll < ApplicationRecord
   belongs_to :user
   has_many :poll_choices, inverse_of: :poll, dependent: :destroy
 
-  TYPES = %w(multiple_choice checkbox rating)
+  TYPES = %w(radio checkbox)
 
   ACCESSIBLE_ATTRIBUTES = [
     :text,
@@ -20,7 +20,7 @@ class Poll < ApplicationRecord
 
   def multiple_choice=(multiple_choice)
     is_multiple_choice = ['true', '1', 1, true, 'multiple_choice'].include?(multiple_choice)
-    self.question_type = is_multiple_choice ?  'multiple_choice' : 'checkbox'
+    self.question_type = is_multiple_choice ?  'radio' : 'checkbox'
   end
 
   private
