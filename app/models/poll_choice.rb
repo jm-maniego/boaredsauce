@@ -5,6 +5,13 @@ class PollChoice < ApplicationRecord
 
   ACCESSIBLE_ATTRIBUTES = [:id, :text]
 
+  accepts_nested_attributes_for :responses
+
   validates :text, presence: true
   validates :text, length: { maximum: 140 }
+
+  def answer(user)
+    poll.answer(user, self)
+    self
+  end
 end

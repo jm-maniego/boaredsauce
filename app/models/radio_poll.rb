@@ -1,0 +1,2 @@
+class RadioPoll < Poll
+end

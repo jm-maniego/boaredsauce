@@ -1,8 +1,10 @@
 class Poll < ApplicationRecord
+  self.inheritance_column = 'question_type'
   belongs_to :user
   has_many :poll_choices, inverse_of: :poll, dependent: :destroy
+  has_many :responses, through: :poll_choices
 
-  TYPES = %w(radio checkbox)
+  TYPES = %w(RadioPoll CheckboxPoll)
 
   ACCESSIBLE_ATTRIBUTES = [
     :text,
@@ -20,7 +22,11 @@ class Poll < ApplicationRecord
 
   def multiple_choice=(multiple_choice)
     is_multiple_choice = ['true', '1', 1, true, 'multiple_choice'].include?(multiple_choice)
-    self.question_type = is_multiple_choice ?  'radio' : 'checkbox'
+    self.question_type = is_multiple_choice ?  'RadioPoll' : 'CheckboxPoll'
+  end
+
+  def answer(user, poll_choice_ids)
+    raise 'override this'
   end
 
   private

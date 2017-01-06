@@ -3,11 +3,12 @@ module Api
     attributes :id, :text
 
     def as_json(options={})
-      respondents_hash = @object.respondents.as_json(include_root: false)
-      answered = respondents_hash.any? {|h| h["id"] == context.id}
+      current_user = context
+      respondents_count = @object.responses.size
+      answered = @object.responses.any? {|res| res.respondent_id == current_user.id}
       super.merge({
         answered: answered,
-        respondents: respondents_hash
+        respondents_count: respondents_count
         })
     end
   end

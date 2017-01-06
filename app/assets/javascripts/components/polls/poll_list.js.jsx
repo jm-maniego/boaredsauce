@@ -4,15 +4,6 @@ class PollScreen extends React.Component {
     return (
       <BSRow>
         <div className="col-xs-2">
-          <Panel>
-            <PanelBody>
-              <ul>
-                {Array(15).fill().map(function(x, i) {
-                  return <li key={i}><a href="#">@channel{i}</a></li>
-                })}
-              </ul>
-            </PanelBody>
-          </Panel>
         </div>
 
         <div id="content-container" className="col-xs-7">
@@ -163,7 +154,8 @@ class NewListContainer extends React.Component {
 class PollList extends React.Component {
   constructor(props) {
     super(props);
-    _.extend(this, Boaredsauce.Mixins.BackboneMixin)
+    // _.extend(this, Boaredsauce.Mixins.BackboneMixin)
+    this.modelOrCollection().on('add remove', _.debounce(()=> this.forceUpdate(), 5));
   }
 
   modelOrCollection() {
@@ -184,14 +176,37 @@ class PollList extends React.Component {
 }
 
 class PollItem extends React.Component {
+  constructor(props) {
+    super(props);
+    this.handleChange = this.handleChange.bind(this);
+    this.forceUpdate = this.forceUpdate.bind(this, null);
+    // _.extend(this, Boaredsauce.Mixins.BackboneMixin)
+    // wont work: this.modelOrCollection().on('change', ()=> this.forceUpdate());
+    // see issue: http://stackoverflow.com/questions/22406126/change-event-in-backbone-relational-not-working
+    // not using backbone relational, but similar
+    this.modelOrCollection().on('change', ()=>_.defer(this.forceUpdate)); // hack
+  }
+
+  modelOrCollection() {
+    return this.props.poll;
+  }
+
+  handleChange(e) {
+    this.props.poll.answer(e.target.value, e.target.checked);
+  }
+
   render() {
+    console.log(this.props.poll.get('id'), 'wat')
     let poll = this.props.poll
     let question_type = poll.get('question_type');
+    let QuestionTypeComponent = window[`${question_type}ChoiceList`]
 
     return (
       <Panel className="poll-item">
         <PollMediaUser poll={poll}/>
-        <PollChoiceList question_type={question_type} collection={poll.get('poll_choices')}/>
+        <QuestionTypeComponent
+          onChange={this.handleChange}
+          collection={poll.get('poll_choices')} />
       </Panel>
       )
   }

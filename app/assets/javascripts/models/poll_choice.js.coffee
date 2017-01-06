@@ -1,6 +1,8 @@
 class Boaredsauce.Models.PollChoice extends Backbone.Model
-  answer: ->
-    @save(
-      {'answered': true},
-        url: Routes.answer_api_poll_choice_path(@get('id'))
-        method: "POST")
+  answer: (answer_bool)->
+    # @attributes.respondents_count += {true: 1, false: -1}[answer_bool]
+    @set('answered', answer_bool)
+    # @save(null,
+    #   url: Routes.answer_api_poll_choice_path(@get('id')),
+    #   method: {true: 'POST', false: "DELETE"}[answer_bool]
+    #   )

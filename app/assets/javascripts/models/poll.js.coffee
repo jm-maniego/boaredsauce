@@ -12,3 +12,10 @@ class Boaredsauce.Models.Poll extends Boaredsauce.Models.BaseModel
       {text: ""},
       {text: ""}])
     @get('poll_choices')
+  answer: (poll_choice_id, answer_bool) ->
+    @save(null, {
+      url: Routes.answer_api_poll_path(@get('id')),
+      method: {true: "POST", false: "DELETE"}[answer_bool],
+      dataType: "json",
+      attrs: {poll_choice_id: poll_choice_id}
+      })

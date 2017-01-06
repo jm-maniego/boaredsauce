@@ -2,10 +2,15 @@ class Boaredsauce.Models.BaseModel extends Backbone.Model
   belongs_to: []
   has_many: []
 
-  defaults:
-    created_at: new Date()
+  dynamicDefaults:
+    created_at: ->
+      new Date()
 
   set: (attributes, options)->
+    _.each(@dynamicDefaults, ((v, k) ->
+      @attributes[k] = v()
+      ), this)
+
     super
     if typeof attributes == 'string'
       return
@@ -45,6 +50,7 @@ class Boaredsauce.Models.BaseModel extends Backbone.Model
       new_json[@type] = json
       json = new_json
     json
+
   created_at: ->
     date = @get('created_at')
     date.toDate()

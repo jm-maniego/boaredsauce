@@ -5,6 +5,11 @@
 
 .poll-item {
   background-color: white;
+
+  .media, .media-body {
+    overflow: visible;
+  }
+
   p {
     word-wrap: break-word;
     font-size: 1.7931034483rem;

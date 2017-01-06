@@ -13,10 +13,10 @@ Rails.application.routes.draw do
   resources :users, only: [:show], controller: 'users'
   resources :polls
   namespace :api, defaults: {format: :json} do
-    resources :polls
-    resources :poll_choices, only: [] do
+    resources :polls do
       member do
         post :answer
+        delete :remove_answer, path: "/answer"
       end
     end
     resources :users, only: [:show]
