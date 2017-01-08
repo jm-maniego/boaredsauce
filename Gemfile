@@ -53,3 +53,5 @@ gem 'devise'
 
 gem 'pry-rails', :group => :development
 gem "js-routes"
+
+ruby "2.3.1"
