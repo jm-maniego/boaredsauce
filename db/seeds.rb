@@ -27,7 +27,7 @@ polls = [
 ].map {|poll_text| {
   text: poll_text,
   poll_choices_attributes: poll_choices,
-  question_type: 'radio'
+  question_type: 'RadioPoll'
   }}
 
 Poll.create!(polls) do |poll|
